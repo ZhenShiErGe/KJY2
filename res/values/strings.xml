@@ -14,5 +14,8 @@
     <string name="aboutus">关于我们</string>
     <string name="logout">退出登录</string>
     
+    <string name="password">密　码</string>
+    <string name="username">账　号</string>
+    
 
 </resources>
