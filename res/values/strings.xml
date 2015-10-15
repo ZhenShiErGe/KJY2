@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">送到了</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="dispatchings">配送</string>
+    <string name="customers">商家</string>
+    <string name="me">我的</string>
+    <string name="userinfo">我的资料</string>
+    <string name="updatepsw">更改密码</string>
+    <string name="updateversion">版本更新</string>
+    <string name="printerset">打印设置</string>
+    <string name="aboutus">关于我们</string>
+    <string name="logout">退出登录</string>
+    
+
+</resources>

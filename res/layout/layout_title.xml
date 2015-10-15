@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48.0dip"
+    android:background="@color/bar_color" >
+
+
+    <!-- app左侧搜索栏目框 -->
+
+    <ImageView
+        android:id="@+id/add_dispatching"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/icon_add" />
+    
+    <!-- app中间地址搜索栏目框 -->
+   <TextView
+         android:id="@+id/tv_common_above_head"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerInside"
+        android:text="车牌号选择"
+        android:background="@drawable/abc_spinner_ab_default_holo_light"
+        android:gravity="center"
+        android:textColor="#fff" />
+	
+	<!-- app右侧侧搜索栏目框 -->
+
+    <ImageView
+        android:id="@+id/scan_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/icon_menu_sao" />
+    
+</RelativeLayout>
