@@ -69,9 +69,11 @@ public class MainActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_main);
 		initTabs();
 		initScan();
+		initAddDispitchBtn();
 		this.helper=new MyDatabaseHelper(this);
 		updateCustomerDataRegularly();
 	}
+	
 	
 	private void initTabs(){
 		fragments=new Fragment[]{dispatchingsFragment,customersFragment,meFragment};
@@ -93,7 +95,22 @@ public class MainActivity extends Activity implements OnClickListener{
 		.hide(fragments[1]).hide(fragments[2]).show(fragments[0]).commit();
 		
 	}
-
+	/**
+	 * 定义左上部添加配送记录
+	 */
+	private void initAddDispitchBtn(){
+		ImageView btn_add_dispitch=(ImageView) findViewById(R.id.add_dispatching);
+		btn_add_dispitch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				//添加配送记录的操作代码
+				//跳转到新的activity，在这里选择盖茨配送的具体信息
+				//点击确认即可添加新的配送信息（注意同一个时间一个用户只能有一个正在配送的记录）
+				//添加成功后返回到主页面
+			}
+		});
+	}
 	/**
 	 * 定义二维码扫描项
 	 */
