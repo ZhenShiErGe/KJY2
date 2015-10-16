@@ -187,7 +187,7 @@ int id encode_failed 0x7f070004
 int id encode_succeeded 0x7f070005
 int id et_password 0x7f070012
 int id et_qr_string 0x7f070036
-int id et_usertel 0x7f070011
+int id et_username 0x7f070011
 int id fragment_container 0x7f070015
 int id ib_contact_list 0x7f07002c
 int id ib_profile 0x7f07002f

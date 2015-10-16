@@ -194,19 +194,19 @@ public class MainActivity extends Activity implements OnClickListener{
 	 */
 	private void updateCustomerDataRegularly(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		MySharedPreferences mySharedPreferences=new MySharedPreferences(this);
-		if(!mySharedPreferences.contains("lastUpdateTime")){
-			mySharedPreferences.putString("lastUpdateTime", sdf.format(new Date()));
+		if(!MySharedPreferences.contains(this,"lastUpdateTime")){
+			MySharedPreferences.putString(this,"lastUpdateTime", sdf.format(new Date()));
 			updateCustomerData();
 		}
 		else{
 			try {
-				String str_lastUpdateDate=mySharedPreferences.getString("lastUpdateTime", "2015-09-19 11:45:16");//后面为默认值
+				String str_lastUpdateDate=MySharedPreferences.getString(this,"lastUpdateTime", "2015-09-19 11:45:16");//后面为默认值
 				Date lastUpDate;
 				lastUpDate = sdf.parse(str_lastUpdateDate);
 				Date currentDate=new Date();
-				if(currentDate.getTime()-lastUpDate.getTime()>=2*24*60*60*1000){//每两天更新数据
-					mySharedPreferences.putString("lastUpdateTime", sdf.format(currentDate));
+//				if(currentDate.getTime()-lastUpDate.getTime()>=2*24*60*60*1000){//每两天更新数据
+				if(true){//每次刷新都要更新数据
+					MySharedPreferences.putString(this,"lastUpdateTime", sdf.format(currentDate));
 					updateCustomerData();
 				}
 			} 
@@ -223,7 +223,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	private void updateCustomerData(){
 		RequestQueue mQueue = Volley.newRequestQueue(this);
 //		StringRequest stringRequest = new StringRequest("http://192.168.0.89/NewDemo/getNewsJSON.php",
-		StringRequest stringRequest = new StringRequest(Constants.GetCustomersURI,		
+		StringRequest stringRequest = new StringRequest(Constants.CustomersURI,		
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
