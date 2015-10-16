@@ -66,7 +66,7 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		
 		TextView tvNick = ViewHolder.get(convertView, R.id.contactitem_nick);
 		
-		String catalog = PingYinUtil.converterToFirstSpell(customer.getCustomerName())
+		String catalog = PingYinUtil.converterToFirstSpell(customer.getStoreName())
 				.substring(0, 1);
 		
 		if (position == 0) {
@@ -75,7 +75,7 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		} else {
 			Customer nextCustomer = customers.get(position - 1);
 			String lastCatalog = PingYinUtil.converterToFirstSpell(
-					nextCustomer.getCustomerName()).substring(0, 1);
+					nextCustomer.getStoreName()).substring(0, 1);
 			if (catalog.equals(lastCatalog)) {
 				tvCatalog.setVisibility(View.GONE);
 			} else {
@@ -85,7 +85,7 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		}
 
 		ivAvatar.setImageResource(R.drawable.head);
-		tvNick.setText(customer.getCustomerName());
+		tvNick.setText(customer.getStoreName());
 		return convertView;
 	}
 
@@ -94,7 +94,7 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 	public int getPositionForSection(int section) {
 		for (int i = 0; i < customers.size(); i++) {
 			Customer customer =customers.get(i);
-			String l = PingYinUtil.converterToFirstSpell(customer.getCustomerName())
+			String l = PingYinUtil.converterToFirstSpell(customer.getStoreName())
 					.substring(0, 1);
 			char firstChar = l.toUpperCase().charAt(0);
 			if (firstChar == section) {

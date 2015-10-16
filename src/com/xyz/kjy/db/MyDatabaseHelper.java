@@ -20,10 +20,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public static final String TABLENAME_CUSTOMER="customer";
 	public static final String ID="id";
-	public static final String CUSATOMERNAME="customerName";
-	public static final String CUSTOMERPERSON	="customerPerson";
-	public static final String PHONENUMBER	="phoneNumber";
+	public static final String STORENAME="storeName";
+	public static final String STOREOWNERNAME	="storeOwnerName";
+	public static final String PHONE	="phone";
 	public static final String ADDRESS	="address";
+	public static final String PRODUCTIONNAME	="productionName";
+	public static final String UNITPRICE="unitPrice";
 	
 	public MyDatabaseHelper(Context context, String name,
 			CursorFactory factory, int version,
@@ -39,10 +41,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
 	private void createTable(SQLiteDatabase db){
 		String sql="create   table  "+ TABLENAME_CUSTOMER +" ("+ID             + " integer , "
-	                                           +CUSATOMERNAME  +" varchar(50), " 
-	                                           +CUSTOMERPERSON +" varchar(50), "
-	                                           +PHONENUMBER    +" varchar(50), "
-	                                           +ADDRESS        +" varchar(50)); ";
+	                                           +STORENAME  +" varchar(50), " 
+	                                           +STOREOWNERNAME +" varchar(50), "
+	                                           +PHONE    +" varchar(50), "
+	                                           +ADDRESS        +" varchar(50),"
+	                                           +PRODUCTIONNAME   +" varchar(50),"
+	                                           +UNITPRICE+" integer"+"); ";
 		db.execSQL(sql);
 		
 	}

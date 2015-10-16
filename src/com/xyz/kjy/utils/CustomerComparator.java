@@ -17,14 +17,14 @@ public class CustomerComparator implements Comparator<Customer> {
 		String catalog0 = "";
 		String catalog1 = "";
 
-		if (customer0 != null && customer0.getCustomerName() != null
-				&& customer0.getCustomerName().length() > 1)
-			catalog0 = PingYinUtil.converterToFirstSpell(customer0.getCustomerName())
+		if (customer0 != null && customer0.getStoreName() != null
+				&& customer0.getStoreName().length() > 1)
+			catalog0 = PingYinUtil.converterToFirstSpell(customer0.getStoreName())
 					.substring(0, 1);
 
-		if (customer1 != null && customer1.getCustomerName() != null
-				&& customer1.getCustomerName().length() > 1)
-			catalog1 = PingYinUtil.converterToFirstSpell(customer1.getCustomerName())
+		if (customer1 != null && customer1.getStoreName() != null
+				&& customer1.getStoreName().length() > 1)
+			catalog1 = PingYinUtil.converterToFirstSpell(customer1.getStoreName())
 					.substring(0, 1);
 		int flag = catalog0.compareTo(catalog1);
 		return flag;

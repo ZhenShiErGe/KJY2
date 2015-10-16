@@ -28,8 +28,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-
 //通讯录
 
 public class CustomersFragment extends Fragment implements OnItemClickListener {
@@ -120,11 +118,13 @@ public class CustomersFragment extends Fragment implements OnItemClickListener {
 		if (customer != null) {
 			Intent intent = new Intent(getActivity(), CustomerInfoActivity.class);
 			
-			intent.putExtra(MyDatabaseHelper.ID, customer.getCustomerID());
-			intent.putExtra(MyDatabaseHelper.CUSATOMERNAME, customer.getCustomerName());
-			intent.putExtra(MyDatabaseHelper.CUSTOMERPERSON, customer.getCustomerPerson());
-			intent.putExtra(MyDatabaseHelper.PHONENUMBER, customer.getPhoneNumber());
+			intent.putExtra(MyDatabaseHelper.ID, customer.getId());
+			intent.putExtra(MyDatabaseHelper.STORENAME, customer.getStoreName());
+			intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,customer.getStoreOwnerName());
+			intent.putExtra(MyDatabaseHelper.PHONE, customer.getPhone());			
+			intent.putExtra(MyDatabaseHelper.PRODUCTIONNAME, customer.getProductionName());
 			intent.putExtra(MyDatabaseHelper.ADDRESS,customer.getAddress());
+			intent.putExtra(MyDatabaseHelper.UNITPRICE, customer.getUnitPrice());
 			
 			getActivity().startActivity(intent);
 			getActivity().overridePendingTransition(R.anim.push_left_in,

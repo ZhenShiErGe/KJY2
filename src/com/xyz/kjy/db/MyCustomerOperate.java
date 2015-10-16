@@ -14,12 +14,15 @@ public class MyCustomerOperate {
 	private void insertNoClose(Customer customer){
 		String sql = "insert into "+MyDatabaseHelper.TABLENAME_CUSTOMER 
 				+"("+MyDatabaseHelper.ID+","
-				+MyDatabaseHelper.CUSATOMERNAME+","
-				+MyDatabaseHelper.CUSTOMERPERSON+","
-				+MyDatabaseHelper.PHONENUMBER+","
-				+MyDatabaseHelper.ADDRESS+") values(?,?,?,?,?);";
-		Object args[] =new Object[]{customer.getCustomerID(),customer.getCustomerName()
-				,customer.getCustomerPerson(),customer.getPhoneNumber(),customer.getAddress()};
+				+MyDatabaseHelper.STORENAME+","
+				+MyDatabaseHelper.STOREOWNERNAME+","
+				+MyDatabaseHelper.PHONE+","
+				+MyDatabaseHelper.ADDRESS+","
+				+MyDatabaseHelper.PRODUCTIONNAME+","
+				+MyDatabaseHelper.UNITPRICE+") values(?,?,?,?,?);";
+		Object args[] =new Object[]{customer.getId(),customer.getStoreName()
+				,customer.getStoreOwnerName(),customer.getPhone(),customer.getAddress()
+				,customer.getProductionName(),customer.getUnitPrice()};
 		this.db.execSQL(sql, args);
 	}
 	
@@ -52,12 +55,13 @@ public class MyCustomerOperate {
 	 */
 	public List<Customer> findAll(){
 		List<Customer> customers=new ArrayList<Customer>();
-		String columns[] = new String[] {MyDatabaseHelper.ID,MyDatabaseHelper.CUSATOMERNAME
-				,MyDatabaseHelper.CUSTOMERPERSON,MyDatabaseHelper.PHONENUMBER,MyDatabaseHelper.ADDRESS};
+		String columns[] = new String[] {MyDatabaseHelper.ID,MyDatabaseHelper.STORENAME,
+				MyDatabaseHelper.STOREOWNERNAME,MyDatabaseHelper.PHONE,
+				MyDatabaseHelper.ADDRESS,MyDatabaseHelper.PRODUCTIONNAME,MyDatabaseHelper.UNITPRICE};
 		Cursor cursor=this.db.query(MyDatabaseHelper.TABLENAME_CUSTOMER, columns,null, null,null, null,null);
 		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
 			customers.add(new Customer(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)
-					,cursor.getString(4)));
+					,cursor.getString(4),cursor.getString(5),cursor.getInt(6)));
 		}
 		this.db.close();
 		return customers;

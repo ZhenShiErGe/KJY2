@@ -1,39 +1,51 @@
 package com.xyz.kjy.db;
 
 
-public class Customer {
-	private int customerID;
-	private String customerName;
-	private String customerPerson;
-	private String phoneNumber;
+public class Customer  {
+	private Integer id;
+	private String storeName;//店名，唯一
+	private String storeOwnerName;
+	private String phone;
 	private String address;
+	private String productionName;
+	private Integer unitPrice;
 	public Customer(){}
-	public Customer(int customerID, String customerName, String customerPerson,
-			String phoneNumber, String address) {
+	public Customer(Integer id, String storeName, String storeOwnerName,
+			String phone, String address, String productionName,
+			Integer unitPrice) {
 		super();
-		this.customerID = customerID;
-		this.customerName = customerName;
-		this.customerPerson = customerPerson;
-		this.phoneNumber = phoneNumber;
+		this.id = id;
+		this.storeName = storeName;
+		this.storeOwnerName = storeOwnerName;
+		this.phone = phone;
 		this.address = address;
+		this.productionName = productionName;
+		this.unitPrice = unitPrice;
+		
 	}
-	public String getCustomerName() {
-		return customerName;
+	public Integer getId() {
+		return id;
 	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public String getCustomerPerson() {
-		return customerPerson;
+	public String getStoreName() {
+		return storeName;
 	}
-	public void setCustomerPerson(String customerPerson) {
-		this.customerPerson = customerPerson;
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getStoreOwnerName() {
+		return storeOwnerName;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setStoreOwnerName(String storeOwnerName) {
+		this.storeOwnerName = storeOwnerName;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getAddress() {
 		return address;
@@ -41,17 +53,26 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getCustomerID() {
-		return customerID;
+	public String getProductionName() {
+		return productionName;
 	}
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setProductionName(String productionName) {
+		this.productionName = productionName;
 	}
+	public Integer getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(Integer unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "Customer [customerID=" + customerID + ", customerName="
-				+ customerName + ", customerPerson=" + customerPerson
-				+ ", phoneNumber=" + phoneNumber + ", address=" + address + "]";
+		return "Customer [id=" + id + ", storeName=" + storeName
+				+ ", storeOwnerName=" + storeOwnerName + ", phone=" + phone
+				+ ", address=" + address + ", productionName=" + productionName
+				+ ", unitPrice=" + unitPrice  + "]";
 	}
 	
 	
