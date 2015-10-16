@@ -11,10 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CustomerInfoActivity extends FragmentActivity {
-	private TextView tvCustomerName;
-	private TextView tvCustomerPerson;
-	private TextView tvPhoneNumber;
+	private TextView tvStoreId;
+	private TextView tvStoreName;
+	private TextView tvStoreBoss;
+	private TextView tvProduction;
+	private TextView tvUnitPrice;
 	private TextView tvAddress;
+	private TextView tvPhone;
 	
 	private ImageView backToMainActivity;
 	@Override
@@ -23,22 +26,26 @@ public class CustomerInfoActivity extends FragmentActivity {
 		setContentView(R.layout.activity_customerinfo);
 		Intent intent=this.getIntent();
 		
-		tvCustomerName=(TextView) findViewById(R.id.txt_customername);
-		tvCustomerPerson=(TextView) findViewById(R.id.txt_customerperson);
-		tvPhoneNumber=(TextView) findViewById(R.id.txt_phonenumber);
-		tvAddress=(TextView) findViewById(R.id.txt_address);
+		tvStoreId=(TextView) findViewById(R.id.txt_storeid);
+		tvStoreName=(TextView) findViewById(R.id.txt_storename);
+		tvStoreBoss=(TextView) findViewById(R.id.txt_storeboss);
+		tvProduction=(TextView) findViewById(R.id.txt_storeProduct);
+		tvUnitPrice=(TextView) findViewById(R.id.txt_unitprice);
+//		tvPhone=findViewById(R.id.txt_)
+		tvAddress=(TextView) findViewById(R.id.txt_storeaddress);
 		backToMainActivity=(ImageView) findViewById(R.id.customerinfo_back_main);
 		
-		tvCustomerName.setText(intent.getStringExtra(MyDatabaseHelper.CUSATOMERNAME));
-		tvCustomerPerson.setText(intent.getStringExtra(MyDatabaseHelper.CUSTOMERPERSON));
-		tvPhoneNumber.setText(intent.getStringExtra(MyDatabaseHelper.PHONENUMBER));
+		tvStoreId.setText(intent.getStringExtra(MyDatabaseHelper.ID));
+		tvStoreName.setText(intent.getStringExtra(MyDatabaseHelper.STORENAME));
+		tvStoreBoss.setText(intent.getStringExtra(MyDatabaseHelper.STOREOWNERNAME));
+		tvProduction.setText(intent.getStringExtra(MyDatabaseHelper.PRODUCTIONNAME));
+		tvUnitPrice.setText(intent.getStringExtra(MyDatabaseHelper.UNITPRICE));
 		tvAddress.setText(intent.getStringExtra(MyDatabaseHelper.ADDRESS));
 		
 		backToMainActivity.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				CustomerInfoActivity.this.finish();
 				CustomerInfoActivity.this.overridePendingTransition(R.anim.push_right_in,
 						R.anim.push_right_out);

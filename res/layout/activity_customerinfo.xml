@@ -13,8 +13,8 @@
         android:layout_weight="0.06"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/txt_customername"
+          <TextView
+            android:id="@+id/txt_storeid"
             style="@style/TxtTitle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -23,7 +23,25 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:paddingRight="10dp"
-            android:text="商家:"
+            android:text="@string/storeId"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="@color/black2" />
+        
+        <TextView
+            android:id="@+id/txt_storename"
+            style="@style/TxtTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/setting_item_selector"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="10dp"
+            android:text="@string/storeName"
             android:textSize="16sp" />
 
         <View
@@ -32,7 +50,7 @@
             android:background="@color/black2" />
 
         <TextView
-            android:id="@+id/txt_customerperson"
+            android:id="@+id/txt_storeboss"
             style="@style/TxtTitle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -40,7 +58,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:paddingRight="10dp"
-            android:text="联系人:"
+            android:text="@string/storeBoss"
             android:textSize="16sp" />
 
         <View
@@ -49,7 +67,7 @@
             android:background="@color/black2" />
 
         <TextView
-            android:id="@+id/txt_phonenumber"
+            android:id="@+id/txt_storeProduct"
             style="@style/TxtTitle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -57,7 +75,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:paddingRight="10dp"
-            android:text="电话:"
+            android:text="@string/production"
             android:textSize="16sp" />
 
         <View
@@ -66,7 +84,7 @@
             android:background="@color/black2" />
         
          <TextView
-            android:id="@+id/txt_address"
+            android:id="@+id/txt_unitprice"
             style="@style/TxtTitle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -75,7 +93,24 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:paddingRight="10dp"
-            android:text="地址:"
+            android:text="@string/unitPrice"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="@color/black2" />
+          <TextView
+            android:id="@+id/txt_storeaddress"
+            style="@style/TxtTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/setting_item_selector"
+        
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="10dp"
+            android:text="@string/storeAddress"
             android:textSize="16sp" />
 
         <View
