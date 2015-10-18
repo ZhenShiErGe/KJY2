@@ -19,7 +19,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	 * 表customer以及他的字段
 	 */
 	public static final String TABLENAME_CUSTOMER="customer";
-	public static final String ID="id";
 	public static final String STORENAME="storeName";
 	public static final String STOREOWNERNAME	="storeOwnerName";
 	public static final String PHONE	="phone";
@@ -40,13 +39,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
 	
 	private void createTable(SQLiteDatabase db){
-		String sql="create   table  "+ TABLENAME_CUSTOMER +" ("+ID             + " integer , "
-	                                           +STORENAME  +" varchar(50), " 
+		String sql="create   table  "+ TABLENAME_CUSTOMER +" ("  +STORENAME  +" varchar(50), " 
 	                                           +STOREOWNERNAME +" varchar(50), "
 	                                           +PHONE    +" varchar(50), "
 	                                           +ADDRESS        +" varchar(50),"
 	                                           +PRODUCTIONNAME   +" varchar(50),"
-	                                           +UNITPRICE+" integer"+"); ";
+	                                           +UNITPRICE+" varchar(50)"+"); ";
 		db.execSQL(sql);
 		
 	}

@@ -170,6 +170,7 @@ int id action_settings 0x7f07003b
 int id add_dispatching 0x7f070033
 int id auto_focus 0x7f070000
 int id btn_add_qrcode 0x7f070039
+int id btn_callstore 0x7f070012
 int id btn_cancel_scan 0x7f07001a
 int id btn_login 0x7f070016
 int id btn_scan_barcode 0x7f070036
@@ -216,12 +217,11 @@ int id tv_scan_result 0x7f070037
 int id tv_weixin 0x7f07002c
 int id txt_aboutus 0x7f070027
 int id txt_printerset 0x7f070025
-int id txt_storeProduct 0x7f070010
-int id txt_storeaddress 0x7f070012
-int id txt_storeboss 0x7f07000f
-int id txt_storeid 0x7f07000d
-int id txt_storename 0x7f07000e
-int id txt_unitprice 0x7f070011
+int id txt_storeProduct 0x7f07000f
+int id txt_storeaddress 0x7f070011
+int id txt_storeboss 0x7f07000e
+int id txt_storename 0x7f07000d
+int id txt_unitprice 0x7f070010
 int id txt_updatepsw 0x7f070024
 int id txt_updateversion 0x7f070026
 int id txt_userinfo 0x7f070023
@@ -246,6 +246,7 @@ int raw realm_properties 0x7f050001
 int string aboutus 0x7f08000d
 int string action_settings 0x7f080005
 int string app_name 0x7f080001
+int string callStorePhone 0x7f080017
 int string cancel 0x7f080003
 int string customers 0x7f080007
 int string dispatchings 0x7f080006

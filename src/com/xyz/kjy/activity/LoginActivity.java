@@ -7,8 +7,10 @@ import com.example.kjy.R;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.utils.MySharedPreferences;
 import com.xyz.kjy.net.JsonObjectPostRequest;
+import com.xyz.kjy.net.RequestCenter;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -88,7 +90,12 @@ public class LoginActivity extends Activity  {
 							if(result){
 								try{
 									String cookie=response.getString("Cookie");
-									MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
+//									MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
+									
+									MySharedPreferences.putString(LoginActivity.this, Constants.Cookie
+											, 
+								"__VCAP_ID__=6b946ac2d99041d28e0c6ca07925380a2d9c5471436f462dbc68b4315d145803; JSESSIONID=CAEA768CE9F4F435077971755CA04611");
+									
 								}catch(JSONException e){
 									Log.e("TAG",e.getMessage());
 									progressDialog.dismiss();
@@ -121,12 +128,12 @@ public class LoginActivity extends Activity  {
 				             Toast.makeText(LoginActivity.this, "网络不可用，登录失败！", Toast.LENGTH_SHORT).show();
 				         }
 				     }, params);
-			//对于每次请求，加上本地存储的cookie用于验证身份
-			     String localCookie = MySharedPreferences.getString(LoginActivity.this,Constants.Cookie, "");
-			     if(!localCookie.equals("")){
-			         jsonObjectPostRequest.setSendCookie(localCookie);//向服务器发起post请求时加上cookie字段
-			     }
-			     Volley.newRequestQueue(LoginActivity.this).add(jsonObjectPostRequest);
+//			//对于每次请求，加上本地存储的cookie用于验证身份
+//			     String localCookie = MySharedPreferences.getString(LoginActivity.this,Constants.Cookie, "");
+//			     if(!localCookie.equals("")){
+//			         jsonObjectPostRequest.setSendCookie(localCookie);//向服务器发起post请求时加上cookie字段
+//			     }
+			RequestCenter.getRequestQueue().add(jsonObjectPostRequest);
 			 }
 	}
 

@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.alibaba.fastjson.JSONArray;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,12 +23,16 @@ import com.xyz.kjy.db.MyDatabaseHelper;
 import com.xyz.kjy.fragment.CustomersFragment;
 import com.xyz.kjy.fragment.DispatchingsFragment;
 import com.xyz.kjy.fragment.MeFragment;
+import com.xyz.kjy.net.JsonObjectGetRequest;
+import com.xyz.kjy.net.JsonObjectPostRequest;
+import com.xyz.kjy.net.RequestCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
 import com.zxing.activity.CaptureActivity;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -221,25 +228,68 @@ public class MainActivity extends Activity implements OnClickListener{
 	 * 更新customer数据到数据库
 	 */
 	private void updateCustomerData(){
-		RequestQueue mQueue = Volley.newRequestQueue(this);
-//		StringRequest stringRequest = new StringRequest("http://192.168.0.89/NewDemo/getNewsJSON.php",
-		StringRequest stringRequest = new StringRequest(Constants.CustomersURI,		
-				new Response.Listener<String>() {
+		
+		//显示正在登录处理对话窗
+		final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
+		progressDialog.setMessage(Constants.UpdatingCustomer);
+		progressDialog.show();
+		//发起请求
+		JsonObjectGetRequest jsonObjectGetRequest =
+				new JsonObjectGetRequest(Constants.CustomersURI, new Response.Listener<JSONObject>() {
 					@Override
-					public void onResponse(String response) {
-						List<Customer> result=JSONArray.parseArray(response,Customer.class);
-						MainActivity.this.myCustomerOperate=new MyCustomerOperate(
-								MainActivity.this.helper.getWritableDatabase());
-						MainActivity.this.myCustomerOperate.updateAll(result);
-						customersFragment.refresh();//跟新数据后刷新数据列表
+					public void onResponse(JSONObject response) {
+						// TODO Auto-generated method stub
+						boolean result=false;
+						try{
+							result=response.getBoolean("isSuccess");
+						}catch(JSONException e){
+							Log.e("TAG",e.getMessage());
+							Log.e("TAG", "更新商家信息失败,内部错误");
+							progressDialog.dismiss();
+						}
+						if(result){
+							
+							try{
+								String jsonString=response.getString("content");
+								List<Customer> customers=JSONArray.parseArray(jsonString,Customer.class);
+								MainActivity.this.myCustomerOperate=new MyCustomerOperate(
+										MainActivity.this.helper.getWritableDatabase());
+								MainActivity.this.myCustomerOperate.updateAll(customers);
+								progressDialog.dismiss();
+								customersFragment.refresh();//跟新数据后刷新数据列表
+							}catch(JSONException e){
+								Log.e("TAG",e.getMessage());
+								Log.e("TAG", "更新商家信息失败,内部错误");
+								progressDialog.dismiss();
+							}
+						}
+						else {
+							progressDialog.dismiss();
+							try{
+								String errorMesg=response.getString("errorMesg");
+								Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+							}catch(JSONException e){
+								Log.e("TAG",e.getMessage());
+								Log.e("TAG", "更新商家信息失败,内部错误");
+							}
+							
+						}
 					}
-				}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						Log.e("TAG", error.getMessage(), error);
-					}
-				});
-		mQueue.add(stringRequest);  
+				},new Response.ErrorListener() {
+			         @Override
+			         public void onErrorResponse(VolleyError volleyError) {                   
+			        	 progressDialog.dismiss();
+			             Toast.makeText(MainActivity.this, "网络不可用，登录失败！", Toast.LENGTH_SHORT).show();
+			         }
+			     });
+		     //对于每次请求，加上本地存储的cookie用于验证身份
+		     String localCookie = MySharedPreferences.getString(MainActivity.this,Constants.Cookie, "");
+		     if(!localCookie.equals("")){
+		         jsonObjectGetRequest.setSendCookie(localCookie);//向服务器发起post请求时加上cookie字段
+		     }
+		     RequestCenter.getRequestQueue().add(jsonObjectGetRequest);
+		
+
 	}
 
 }

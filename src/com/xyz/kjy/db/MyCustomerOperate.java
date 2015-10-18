@@ -13,14 +13,13 @@ public class MyCustomerOperate {
 	}
 	private void insertNoClose(Customer customer){
 		String sql = "insert into "+MyDatabaseHelper.TABLENAME_CUSTOMER 
-				+"("+MyDatabaseHelper.ID+","
-				+MyDatabaseHelper.STORENAME+","
+				+"("+MyDatabaseHelper.STORENAME+","
 				+MyDatabaseHelper.STOREOWNERNAME+","
 				+MyDatabaseHelper.PHONE+","
 				+MyDatabaseHelper.ADDRESS+","
 				+MyDatabaseHelper.PRODUCTIONNAME+","
-				+MyDatabaseHelper.UNITPRICE+") values(?,?,?,?,?);";
-		Object args[] =new Object[]{customer.getId(),customer.getStoreName()
+				+MyDatabaseHelper.UNITPRICE+") values(?,?,?,?,?,?);";
+		Object args[] =new Object[]{customer.getStoreName()
 				,customer.getStoreOwnerName(),customer.getPhone(),customer.getAddress()
 				,customer.getProductionName(),customer.getUnitPrice()};
 		this.db.execSQL(sql, args);
@@ -34,9 +33,9 @@ public class MyCustomerOperate {
 	/**
 	 * @param customer
 	 */
-	public void delete(int customerId){
-		String sql="delete from "+MyDatabaseHelper.TABLENAME_CUSTOMER+" where "+MyDatabaseHelper.ID+" =?;";
-		Object args[] = new Object[]{customerId};
+	public void delete(String storeName){
+		String sql="delete from "+MyDatabaseHelper.TABLENAME_CUSTOMER+" where "+MyDatabaseHelper.STORENAME+" =?;";
+		Object args[] = new Object[]{storeName};
 		this.db.execSQL(sql,args);
 		this.db.close();
 	}
@@ -55,13 +54,13 @@ public class MyCustomerOperate {
 	 */
 	public List<Customer> findAll(){
 		List<Customer> customers=new ArrayList<Customer>();
-		String columns[] = new String[] {MyDatabaseHelper.ID,MyDatabaseHelper.STORENAME,
+		String columns[] = new String[] {MyDatabaseHelper.STORENAME,
 				MyDatabaseHelper.STOREOWNERNAME,MyDatabaseHelper.PHONE,
 				MyDatabaseHelper.ADDRESS,MyDatabaseHelper.PRODUCTIONNAME,MyDatabaseHelper.UNITPRICE};
 		Cursor cursor=this.db.query(MyDatabaseHelper.TABLENAME_CUSTOMER, columns,null, null,null, null,null);
 		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
-			customers.add(new Customer(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)
-					,cursor.getString(4),cursor.getString(5),cursor.getInt(6)));
+			customers.add(new Customer(cursor.getString(0),cursor.getString(1),cursor.getString(2)
+					,cursor.getString(3),cursor.getString(4),cursor.getString(5)));
 		}
 		this.db.close();
 		return customers;

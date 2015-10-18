@@ -118,7 +118,6 @@ public class CustomersFragment extends Fragment implements OnItemClickListener {
 		if (customer != null) {
 			Intent intent = new Intent(getActivity(), CustomerInfoActivity.class);
 			
-			intent.putExtra(MyDatabaseHelper.ID, customer.getId());
 			intent.putExtra(MyDatabaseHelper.STORENAME, customer.getStoreName());
 			intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,customer.getStoreOwnerName());
 			intent.putExtra(MyDatabaseHelper.PHONE, customer.getPhone());			

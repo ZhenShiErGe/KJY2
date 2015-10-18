@@ -2,19 +2,17 @@ package com.xyz.kjy.db;
 
 
 public class Customer  {
-	private Integer id;
 	private String storeName;//店名，唯一
 	private String storeOwnerName;
 	private String phone;
 	private String address;
 	private String productionName;
-	private Integer unitPrice;
+	private String unitPrice;
 	public Customer(){}
-	public Customer(Integer id, String storeName, String storeOwnerName,
+	public Customer( String storeName, String storeOwnerName,
 			String phone, String address, String productionName,
-			Integer unitPrice) {
+			String unitPrice) {
 		super();
-		this.id = id;
 		this.storeName = storeName;
 		this.storeOwnerName = storeOwnerName;
 		this.phone = phone;
@@ -22,12 +20,6 @@ public class Customer  {
 		this.productionName = productionName;
 		this.unitPrice = unitPrice;
 		
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	public String getStoreName() {
 		return storeName;
@@ -59,17 +51,17 @@ public class Customer  {
 	public void setProductionName(String productionName) {
 		this.productionName = productionName;
 	}
-	public Integer getUnitPrice() {
+	public String getUnitPrice() {
 		return unitPrice;
 	}
-	public void setUnitPrice(Integer unitPrice) {
+	public void setUnitPrice(String unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", storeName=" + storeName
+		return "Customer ["+" storeName=" + storeName
 				+ ", storeOwnerName=" + storeOwnerName + ", phone=" + phone
 				+ ", address=" + address + ", productionName=" + productionName
 				+ ", unitPrice=" + unitPrice  + "]";
