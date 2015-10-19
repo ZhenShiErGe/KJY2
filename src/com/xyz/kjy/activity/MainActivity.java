@@ -248,7 +248,6 @@ public class MainActivity extends Activity implements OnClickListener{
 							progressDialog.dismiss();
 						}
 						if(result){
-							
 							try{
 								String jsonString=response.getString("content");
 								List<Customer> customers=JSONArray.parseArray(jsonString,Customer.class);

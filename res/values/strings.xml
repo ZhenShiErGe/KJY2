@@ -17,6 +17,7 @@
     <string name="password">密　码</string>
     <string name="username">账　号</string>
     
+    <string name="customerInfo">商家信息</string>
     <string name="storeId">编号</string>
     <string name="storeName">店名</string>
     <string name="storeBoss">店主</string>

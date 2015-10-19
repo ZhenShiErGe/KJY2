@@ -90,12 +90,7 @@ public class LoginActivity extends Activity  {
 							if(result){
 								try{
 									String cookie=response.getString("Cookie");
-//									MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
-									
-									MySharedPreferences.putString(LoginActivity.this, Constants.Cookie
-											, 
-								"__VCAP_ID__=6b946ac2d99041d28e0c6ca07925380a2d9c5471436f462dbc68b4315d145803; JSESSIONID=CAEA768CE9F4F435077971755CA04611");
-									
+									MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
 								}catch(JSONException e){
 									Log.e("TAG",e.getMessage());
 									progressDialog.dismiss();

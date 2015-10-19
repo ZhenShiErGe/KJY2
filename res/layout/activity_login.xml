@@ -5,7 +5,7 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/login_title"/>
 
     <LinearLayout
         android:layout_width="match_parent"
