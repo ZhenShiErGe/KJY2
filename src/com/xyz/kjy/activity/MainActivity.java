@@ -1,21 +1,20 @@
 package com.xyz.kjy.activity;
 
 
+import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSONArray;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.kjy.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.Customer;
 import com.xyz.kjy.db.MyCustomerOperate;
@@ -23,9 +22,7 @@ import com.xyz.kjy.db.MyDatabaseHelper;
 import com.xyz.kjy.fragment.CustomersFragment;
 import com.xyz.kjy.fragment.DispatchingsFragment;
 import com.xyz.kjy.fragment.MeFragment;
-import com.xyz.kjy.net.JsonObjectGetRequest;
-import com.xyz.kjy.net.JsonObjectPostRequest;
-import com.xyz.kjy.net.RequestCenter;
+import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
 import com.zxing.activity.CaptureActivity;
 
@@ -233,62 +230,112 @@ public class MainActivity extends Activity implements OnClickListener{
 		final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
 		progressDialog.setMessage(Constants.UpdatingCustomer);
 		progressDialog.show();
-		//发起请求
-		JsonObjectGetRequest jsonObjectGetRequest =
-				new JsonObjectGetRequest(Constants.CustomersURI, new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						// TODO Auto-generated method stub
-						boolean result=false;
-						try{
-							result=response.getBoolean("isSuccess");
-						}catch(JSONException e){
-							Log.e("TAG",e.getMessage());
-							Log.e("TAG", "更新商家信息失败,内部错误");
-							progressDialog.dismiss();
-						}
-						if(result){
-							try{
-								String jsonString=response.getString("content");
-								List<Customer> customers=JSONArray.parseArray(jsonString,Customer.class);
-								MainActivity.this.myCustomerOperate=new MyCustomerOperate(
-										MainActivity.this.helper.getWritableDatabase());
-								MainActivity.this.myCustomerOperate.updateAll(customers);
-								progressDialog.dismiss();
-								customersFragment.refresh();//跟新数据后刷新数据列表
-							}catch(JSONException e){
-								Log.e("TAG",e.getMessage());
-								Log.e("TAG", "更新商家信息失败,内部错误");
-								progressDialog.dismiss();
-							}
-						}
-						else {
-							progressDialog.dismiss();
-							try{
-								String errorMesg=response.getString("errorMesg");
-								Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
-							}catch(JSONException e){
-								Log.e("TAG",e.getMessage());
-								Log.e("TAG", "更新商家信息失败,内部错误");
-							}
-							
-						}
+		//开始发送请求
+		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+		if(HttpClientCenter.getCookie().size()!=0)
+			client.setCookieStore(HttpClientCenter.getCookieStore());
+		client.get(Constants.CustomersURI, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				boolean result=false;
+				try{
+					result=response.getBoolean("isSuccess");
+				}catch(JSONException e){
+					Log.e("TAG",e.getMessage());
+					Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
+				}
+				if(result){
+					try{
+						String jsonString=response.getString("content");
+						List<Customer> customers=JSONArray.parseArray(jsonString,Customer.class);
+						MainActivity.this.myCustomerOperate=new MyCustomerOperate(
+								MainActivity.this.helper.getWritableDatabase());
+						MainActivity.this.myCustomerOperate.updateAll(customers);
+						customersFragment.refresh();//更新数据后刷新数据列表
+					}catch(JSONException e){
+						Log.e("TAG",e.getMessage());
+						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
 					}
-				},new Response.ErrorListener() {
-			         @Override
-			         public void onErrorResponse(VolleyError volleyError) {                   
-			        	 progressDialog.dismiss();
-			             Toast.makeText(MainActivity.this, "网络不可用，登录失败！", Toast.LENGTH_SHORT).show();
-			         }
-			     });
-		     //对于每次请求，加上本地存储的cookie用于验证身份
-		     String localCookie = MySharedPreferences.getString(MainActivity.this,Constants.Cookie, "");
-		     if(!localCookie.equals("")){
-		         jsonObjectGetRequest.setSendCookie(localCookie);//向服务器发起post请求时加上cookie字段
-		     }
-		     RequestCenter.getRequestQueue().add(jsonObjectGetRequest);
-		
-
+					progressDialog.dismiss();
+				}
+				else {
+					progressDialog.dismiss();
+					try{
+						String errorMesg=response.getString("errorMesg");
+						Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+					}catch(JSONException e){
+						Log.e("TAG",e.getMessage());
+						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
+					}
+					
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				// TODO Auto-generated method stub
+				progressDialog.dismiss();
+				Log.e("TAG",throwable.getMessage());
+				Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
-
 }
+
+
+
+//发起请求
+//JsonObjectGetRequest jsonObjectGetRequest =
+//		new JsonObjectGetRequest(Constants.CustomersURI, new Response.Listener<JSONObject>() {
+//			@Override
+//			public void onResponse(JSONObject response) {
+//				// TODO Auto-generated method stub
+//				boolean result=false;
+//				try{
+//					result=response.getBoolean("isSuccess");
+//				}catch(JSONException e){
+//					Log.e("TAG",e.getMessage());
+//					Log.e("TAG", "更新商家信息失败,内部错误");
+//					progressDialog.dismiss();
+//				}
+//				if(result){
+//					try{
+//						String jsonString=response.getString("content");
+//						List<Customer> customers=JSONArray.parseArray(jsonString,Customer.class);
+//						MainActivity.this.myCustomerOperate=new MyCustomerOperate(
+//								MainActivity.this.helper.getWritableDatabase());
+//						MainActivity.this.myCustomerOperate.updateAll(customers);
+//						progressDialog.dismiss();
+//						customersFragment.refresh();//跟新数据后刷新数据列表
+//					}catch(JSONException e){
+//						Log.e("TAG",e.getMessage());
+//						Log.e("TAG", "更新商家信息失败,内部错误");
+//						progressDialog.dismiss();
+//					}
+//				}
+//				else {
+//					progressDialog.dismiss();
+//					try{
+//						String errorMesg=response.getString("errorMesg");
+//						Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+//					}catch(JSONException e){
+//						Log.e("TAG",e.getMessage());
+//						Log.e("TAG", "更新商家信息失败,内部错误");
+//					}
+//					
+//				}
+//			}
+//		},new Response.ErrorListener() {
+//	         @Override
+//	         public void onErrorResponse(VolleyError volleyError) {                   
+//	        	 progressDialog.dismiss();
+//	             Toast.makeText(MainActivity.this, "网络不可用，登录失败！", Toast.LENGTH_SHORT).show();
+//	         }
+//	     });
+//     //对于每次请求，加上本地存储的cookie用于验证身份
+//     String localCookie = MySharedPreferences.getString(MainActivity.this,Constants.Cookie, "");
+//     if(!localCookie.equals("")){
+//         jsonObjectGetRequest.setSendCookie(localCookie);//向服务器发起post请求时加上cookie字段
+//     }
+//     RequestCenter.getRequestQueue().add(jsonObjectGetRequest);
