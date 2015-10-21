@@ -1,50 +1,32 @@
 package com.xyz.kjy.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.loopj.android.http.SyncHttpClient;
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.alibaba.fastjson.JSONArray;
 import com.example.kjy.R;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xyz.kjy.activity.CustomerInfoActivity;
-import com.xyz.kjy.activity.MainActivity;
 import com.xyz.kjy.constant.Constants;
-import com.xyz.kjy.db.Customer;
 import com.xyz.kjy.db.DispatchInfo;
-import com.xyz.kjy.db.MyCustomerOperate;
-import com.xyz.kjy.db.MyDatabaseHelper;
 import com.xyz.kjy.net.HttpClientCenter;
-import com.xyz.kjy.utils.SideBar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
 
 @SuppressLint("NewApi")
 public class DispatchingsFragment extends Fragment {
 	private Activity ctx;
 	private View layout;
 	private DispatchInfo dispatchInfo=null;
-	
+	private DispatchInfoFragment dispatchInfoFragment=null;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -56,21 +38,27 @@ public class DispatchingsFragment extends Fragment {
 			initDispatchInfoFromNet();//获取当前配送员的配送信息
 			if(dispatchInfo!=null){
 				//layout中添加新的fragment_dispatching_info
-				ctx.getFragmentManager().beginTransaction().add(R.id.fragment_dispatch_container, )
+				dispatchInfoFragment=new DispatchInfoFragment();
+				//为该fragment关联数据
+				Bundle bundle=new Bundle();
+				bundle.putString("dispatchCar",dispatchInfo.getCarNum());
+				bundle.putString("dispatchStarttime", dispatchInfo.getStartTime());
+				dispatchInfoFragment.setArguments(bundle);
+				ctx.getFragmentManager().beginTransaction().add(R.id.fragment_dispatch_container,dispatchInfoFragment).show(dispatchInfoFragment).commit();
 			}
-			
-		} else {
+		}else {
 			ViewGroup parent = (ViewGroup) layout.getParent();
 			if (parent != null) {
 				parent.removeView(layout);
 			}
 		}
-		
 		return layout;
 	}
-
+/**
+ * 如果当前配送员没有正在配送记录，空白
+ * 如果有正在配送记录，显示之
+ */
 	private void initDispatchInfoFromNet() {
-		final DispatchInfo finalDispatchInfo=null;
 		SyncHttpClient client=HttpClientCenter.getSyncHttpClient();
 		if(HttpClientCenter.getCookie().size()!=0)
 			client.setCookieStore(HttpClientCenter.getCookieStore());
@@ -91,7 +79,7 @@ public class DispatchingsFragment extends Fragment {
 						JSONObject json=new JSONObject(jsonString);
 						String jsonString1=json.getString("dispatchInfo");
 						if(!"".equals(jsonString1)){
-							finalDispatchInfo=com.alibaba.fastjson.JSONObject.parseObject(jsonString1, DispatchInfo.class);
+							dispatchInfo=com.alibaba.fastjson.JSONObject.parseObject(jsonString1, DispatchInfo.class);
 						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
@@ -116,12 +104,16 @@ public class DispatchingsFragment extends Fragment {
 			}
 		});
 	}
+	public DispatchInfo getDispatchInfo() {
+		return dispatchInfo;
 	}
-
-
-
-
-	
 	
 	
 }
+
+
+
+
+	
+	
+	

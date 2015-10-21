@@ -1,7 +1,6 @@
 package com.xyz.kjy.activity;
 
 
-import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -108,10 +107,14 @@ public class MainActivity extends Activity implements OnClickListener{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				//添加配送记录的操作代码
-				//跳转到新的activity，在这里选择盖茨配送的具体信息
-				//点击确认即可添加新的配送信息（注意同一个时间一个用户只能有一个正在配送的记录）
-				//添加成功后返回到主页面
+				if(dispatchingsFragment.getDispatchInfo()!=null){
+					Toast.makeText(MainActivity.this, "已经在配送", Toast.LENGTH_SHORT).show();
+				}
+				else{
+					Intent intent=new Intent(MainActivity.this,StartDispatchActivity.class);
+					//跳转到新的activity，在这里选择配送的具体信息
+					 startActivity(intent);
+				}
 			}
 		});
 	}

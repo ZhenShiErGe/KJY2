@@ -41,6 +41,7 @@
         
         <activity android:name="com.xyz.kjy.activity.CustomerInfoActivity"/>
         <activity android:name="com.xyz.kjy.activity.MainActivity"/>
+        <activity android:name="com.xyz.kjy.activity.StartDispatchActivity"/>
     </application>
 
 </manifest>

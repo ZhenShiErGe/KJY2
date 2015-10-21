@@ -27,11 +27,13 @@
     <string name="storeAddress">地址</string>
     <string name="callStorePhone">拨打电话</string>
     
+    <string name="dispatchInfo">配送信息</string>
     <string name="onDispatching">正在配送</string>
     <string name="dispatchPerson">配送员</string>
     <string name="dispatchCar">车牌号</string>
     <string name="dispatchStartTime">开始时间</string>
     <string name="dispatchOver">结束配送</string>
+    <string name="dispatchStart">开始配送</string>
     
     
 
