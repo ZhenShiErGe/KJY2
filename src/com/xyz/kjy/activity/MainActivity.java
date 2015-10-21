@@ -49,9 +49,9 @@ public class MainActivity extends Activity implements OnClickListener{
 	private MeFragment meFragment=new MeFragment();;
 	private Fragment [] fragments;
 	
-	private ImageView btnDispatching;
-	private ImageView btnCustomer;
-	private ImageView btnMe;
+//	private ImageView btnDispatching;
+//	private ImageView btnCustomer;
+//	private ImageView btnMe;
 	private ImageView btns[];
 	
 	int currentTabIndex;
@@ -106,8 +106,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		btn_add_dispitch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				if(dispatchingsFragment.getDispatchInfo()!=null){
+				if(dispatchingsFragment.getDispatchInfoFragment().isAdded()){
 					Toast.makeText(MainActivity.this, "已经在配送", Toast.LENGTH_SHORT).show();
 				}
 				else{

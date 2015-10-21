@@ -2,7 +2,6 @@ package com.xyz.kjy.fragment;
 
 import com.example.kjy.R;
 import com.xyz.kjy.constant.Constants;
-import com.xyz.kjy.db.DispatchInfo;
 import com.xyz.kjy.utils.MySharedPreferences;
 
 import android.app.Fragment;

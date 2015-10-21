@@ -4,9 +4,9 @@ import org.apache.http.Header;
 import org.json.JSONException;
 
 import com.example.kjy.R;
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.SyncHttpClient;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
@@ -18,13 +18,14 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class StartDispatchActivity extends FragmentActivity {
 	private TextView tvDispatchPerson;
-	private TextView tvDispatchCar;
+	private EditText tvDispatchCar;
 	private Button startDispatch;
 	private ImageView backToMainActivity;
 	//点击确认即可添加新的配送信息（注意同一个时间一个用户只能有一个正在配送的记录）
@@ -36,7 +37,7 @@ public class StartDispatchActivity extends FragmentActivity {
 		setContentView(R.layout.activity_startdispatch);
 		
 		tvDispatchPerson=(TextView) findViewById(R.id.txt_dispatchPerson);
-		tvDispatchCar=(TextView) findViewById(R.id.txt_dispatchCar);
+		tvDispatchCar=(EditText) findViewById(R.id.txt_dispatchCar);
 		startDispatch=(Button) findViewById(R.id.btn_dispatchStart);
 		backToMainActivity=(ImageView) findViewById(R.id.startdispatch_back_main);
 		
@@ -46,8 +47,10 @@ public class StartDispatchActivity extends FragmentActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent= new Intent(StartDispatchActivity.this,MainActivity.class);
-				startActivity(intent);
+				
+				StartDispatchActivity.this.finish();
+				StartDispatchActivity.this.overridePendingTransition(R.anim.push_right_in,
+						R.anim.push_right_out);
 			}
 		});
 		
@@ -63,7 +66,7 @@ public class StartDispatchActivity extends FragmentActivity {
 				progressDialog.setMessage(Constants.StartingDispatch);
 				progressDialog.show();
 				
-				SyncHttpClient client=HttpClientCenter.getSyncHttpClient();
+				AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
 				if(HttpClientCenter.getCookie().size()!=0)
 					client.setCookieStore(HttpClientCenter.getCookieStore());
 				client.post(Constants.CustomersURI,params,new JsonHttpResponseHandler(){
@@ -75,6 +78,7 @@ public class StartDispatchActivity extends FragmentActivity {
 							Log.e("TAG","内部错误："+e.getMessage());
 							Toast.makeText(StartDispatchActivity.this, "创建配送记录失败", Toast.LENGTH_SHORT).show();
 						}
+						Log.i("TAG",result+"");
 						if(result){
 			     			Intent intent =new Intent(StartDispatchActivity.this,MainActivity.class);
 			     			startActivity(intent);
@@ -83,7 +87,7 @@ public class StartDispatchActivity extends FragmentActivity {
 							progressDialog.dismiss();
 							try{
 								String errorMesg=response.getString("errorMesg");
-								Toast.makeText(StartDispatchActivity.this, "创建配送记录失败", Toast.LENGTH_SHORT).show();
+								Toast.makeText(StartDispatchActivity.this, "创建配送记录失败:"+errorMesg, Toast.LENGTH_SHORT).show();
 							}catch(JSONException e){
 								Log.e("TAG","内部错误："+e.getMessage());
 								Toast.makeText(StartDispatchActivity.this, "创建配送记录失败", Toast.LENGTH_SHORT).show();

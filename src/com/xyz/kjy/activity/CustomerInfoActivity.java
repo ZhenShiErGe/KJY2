@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CustomerInfoActivity extends FragmentActivity {
-	private TextView tvStoreId;
 	private TextView tvStoreName;
 	private TextView tvStoreBoss;
 	private TextView tvProduction;

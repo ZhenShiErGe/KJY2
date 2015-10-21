@@ -1,12 +1,9 @@
 package com.xyz.kjy.activity;
 
 import org.apache.http.Header;
-import org.apache.http.client.HttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.xyz.kjy.constant.Constants;
@@ -22,17 +19,12 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
 
 public class LoginActivity extends Activity  {
 
