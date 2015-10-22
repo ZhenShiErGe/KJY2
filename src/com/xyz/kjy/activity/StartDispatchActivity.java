@@ -101,7 +101,7 @@ public class StartDispatchActivity extends FragmentActivity {
 							String responseString, Throwable throwable) {
 						progressDialog.dismiss();
 						Log.e("TAG",throwable.getMessage());
-						Toast.makeText(StartDispatchActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+						Toast.makeText(StartDispatchActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 					}
 				});
 			}

@@ -96,7 +96,7 @@ public class DispatchingsFragment extends Fragment {
 			public void onFailure(int statusCode, Header[] headers,
 					String responseString, Throwable throwable) {
 				Log.e("TAG",throwable.getMessage());
-				Toast.makeText(ctx, "网络连接失败", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

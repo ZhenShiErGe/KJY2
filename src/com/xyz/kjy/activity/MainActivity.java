@@ -281,7 +281,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				// TODO Auto-generated method stub
 				progressDialog.dismiss();
 				Log.e("TAG",throwable.getMessage());
-				Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

@@ -108,7 +108,7 @@ public class LoginActivity extends Activity  {
 					// TODO Auto-generated method stub
 					progressDialog.dismiss();
 					Log.e("TAG",throwable.getMessage());
-					Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 				}
 			});
 		}
