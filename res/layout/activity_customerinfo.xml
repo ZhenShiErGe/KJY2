@@ -22,6 +22,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:paddingRight="10dp"
+            android:layout_marginTop="22dp"
             android:text="@string/storeName"
             android:textSize="16sp" />
 
@@ -36,7 +37,7 @@
             style="@style/TxtTitle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/setting_item_selector"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
@@ -96,14 +97,7 @@
             android:paddingRight="10dp"
             android:text="@string/storeAddress"
             android:textSize="16sp" />
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1.0dip"
-            android:background="@color/black2" />
         
-        
-      
-          
          <LinearLayout
 				android:gravity="center"
 				android:padding="20.0dip"

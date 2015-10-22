@@ -3,6 +3,9 @@ package com.xyz.kjy.activity;
 import com.example.kjy.R;
 import com.xyz.kjy.db.MyDatabaseHelper;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,13 +45,6 @@ public class CustomerInfoActivity extends FragmentActivity {
 		tvAddress.setText(intent.getStringExtra(MyDatabaseHelper.ADDRESS));
 		
 		final String phoneNumber=intent.getStringExtra(MyDatabaseHelper.PHONE);
-		btnPhone.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+phoneNumber));
-				startActivity(intent);
-			}
-		});
 		
 		backToMainActivity.setOnClickListener(new View.OnClickListener() {
 			
@@ -61,5 +57,29 @@ public class CustomerInfoActivity extends FragmentActivity {
 			}
 		});
 		
+		btnPhone.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				
+				//添加确认对话框
+				final Dialog dialog=new AlertDialog.Builder(CustomerInfoActivity.this)
+				.setMessage("号码："+phoneNumber)
+				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						arg0.cancel();
+					}
+				})
+				.setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+phoneNumber));
+						startActivity(intent);
+					}
+				})
+				.create();
+				dialog.show();
+			}
+		});
 	}
 }
