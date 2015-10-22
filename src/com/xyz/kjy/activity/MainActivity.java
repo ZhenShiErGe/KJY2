@@ -126,11 +126,13 @@ public class MainActivity extends Activity implements OnClickListener{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast toast=Toast.makeText(MainActivity.this, "正在加载", Toast.LENGTH_SHORT);
-				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
+//				Toast toast=Toast.makeText(MainActivity.this, "正在加载", Toast.LENGTH_SHORT);
+				final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
+				progressDialog.setMessage(Constants.BeingLoad);
+				progressDialog.show();
 				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
 				startActivity(scanIntent);
+				progressDialog.dismiss();
 			}
 		});
 	}
@@ -230,7 +232,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		
 		//显示正在登录处理对话窗
 		final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
-		progressDialog.setMessage(Constants.UpdatingCustomer);
+		progressDialog.setMessage(Constants.BeingUpdateCustomer);
 		progressDialog.show();
 		//开始发送请求
 		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();

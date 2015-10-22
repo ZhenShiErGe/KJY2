@@ -15,8 +15,9 @@ public class Constants {
 	public static final String ResponseStatus="responseStatus";
 	public static final String ResponseData="responseData";
 	public static final String BeingLogin="正在登录";
-	public static final String UpdatingCustomer="正在更新商家信息";
-	public static final String StartingDispatch="创建配送记录";
+	public static final String BeingLoad="正在加载";
+	public static final String BeingUpdateCustomer="正在更新商家信息";
+	public static final String BeingStartDispatch="正在创建配送记录";
 	
 
 	

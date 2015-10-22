@@ -86,9 +86,10 @@ public class LoginActivity extends Activity  {
 		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, password);
 //		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, DES.md5Pwd(password));
 		     			MySharedPreferences.putBoolean(LoginActivity.this,Constants.UserIsLogin,true);
-		     			progressDialog.dismiss();
 		     			Intent intent =new Intent(LoginActivity.this,MainActivity.class);
 		     			startActivity(intent);
+		     			progressDialog.dismiss();
+		     			
 					}
 					else {
 						progressDialog.dismiss();

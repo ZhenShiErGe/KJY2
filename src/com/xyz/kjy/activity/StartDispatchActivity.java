@@ -61,15 +61,16 @@ public class StartDispatchActivity extends FragmentActivity {
 				//需要发送的参数
 				RequestParams params=new RequestParams();
 				params.put("carNum", tvDispatchCar.getText().toString().trim());
+				Log.i("TAG",tvDispatchCar.getText().toString());
 				//显示正在登录处理对话窗
 				final ProgressDialog progressDialog=new ProgressDialog(StartDispatchActivity.this);
-				progressDialog.setMessage(Constants.StartingDispatch);
+				progressDialog.setMessage(Constants.BeingStartDispatch);
 				progressDialog.show();
 				
 				AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
 				if(HttpClientCenter.getCookie().size()!=0)
 					client.setCookieStore(HttpClientCenter.getCookieStore());
-				client.post(Constants.CustomersURI,params,new JsonHttpResponseHandler(){
+				client.post(Constants.DispatchStartURI,params,new JsonHttpResponseHandler(){
 					public void onSuccess(int statusCode,Header[] headers, org.json.JSONObject response) {
 						boolean result=false;
 						try{
@@ -81,6 +82,7 @@ public class StartDispatchActivity extends FragmentActivity {
 						Log.i("TAG",result+"");
 						if(result){
 			     			Intent intent =new Intent(StartDispatchActivity.this,MainActivity.class);
+			     			progressDialog.dismiss();
 			     			startActivity(intent);
 						}
 						else {
