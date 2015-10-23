@@ -14,6 +14,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xyz.kjy.activity.CustomerInfoActivity;
 import com.xyz.kjy.activity.LoginActivity;
 import com.xyz.kjy.activity.MainActivity;
+import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
@@ -130,8 +131,7 @@ public class DispatchInfoFragment extends Fragment {
 			}
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
-					String responseString, Throwable throwable) {
-				// TODO Auto-generated method stub
+					Throwable throwable, JSONObject errorResponse) {
 				progressDialog.dismiss();
 				Log.e("TAG",throwable.getMessage());
 				Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package com.xyz.kjy.activity;
 
 import org.apache.http.Header;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
@@ -96,9 +97,10 @@ public class StartDispatchActivity extends FragmentActivity {
 							}
 						}
 					}
+					
 					@Override
 					public void onFailure(int statusCode, Header[] headers,
-							String responseString, Throwable throwable) {
+							Throwable throwable, JSONObject errorResponse) {
 						progressDialog.dismiss();
 						Log.e("TAG",throwable.getMessage());
 						Toast.makeText(StartDispatchActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();

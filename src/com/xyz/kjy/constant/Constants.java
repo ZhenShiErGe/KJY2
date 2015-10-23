@@ -9,10 +9,10 @@ public class Constants {
 	public static final String DispatchStartURI="http://financialsys.coding.io/dispatch/doStart.json";
 	public static final String DispatchOverURI="http://financialsys.coding.io/dispatch/doEnd.json";
 	
-	public static final String Cookie="cookie";
+//	public static final String Cookie="cookie";
 	public static final String UserIsLogin="isLogin";
 	public static final String UserName="userName";
-	public static final String UserPass="password";
+//	public static final String UserPass="password";
 	public static final String ResponseStatus="responseStatus";
 	public static final String ResponseData="responseData";
 	public static final String BeingLogin="正在登录";

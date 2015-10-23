@@ -18,9 +18,11 @@ public class HttpClientCenter extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		client=new AsyncHttpClient();
+		client.setTimeout(5000);
+//		client.setMaxRetriesAndTimeout(1, 3000);
 		cookieStore=new PersistentCookieStore(getApplicationContext());
 	}
-	
+
 	public static AsyncHttpClient getAsyncHttpClient(){
 		return client;
 	}

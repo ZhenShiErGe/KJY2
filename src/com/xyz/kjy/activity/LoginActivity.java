@@ -44,6 +44,11 @@ public class LoginActivity extends Activity  {
 		
 		et_username.addTextChangedListener(new TextChange());
 		et_password.addTextChangedListener(new TextChange());
+		
+		String lastUserName=MySharedPreferences.getString(LoginActivity.this,Constants.UserName, "");
+		if(!"".equals(lastUserName)){
+			et_username.setText(lastUserName);
+		}
 		btn_login.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -81,9 +86,9 @@ public class LoginActivity extends Activity  {
 					}
 					if(result){
 						String cookie=getCookieFromHeaders(headers);
-						MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
+//						MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
 		        		MySharedPreferences.putString(LoginActivity.this,Constants.UserName, userName);
-		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, password);
+//		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, password);
 //		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, DES.md5Pwd(password));
 		     			MySharedPreferences.putBoolean(LoginActivity.this,Constants.UserIsLogin,true);
 		     			Intent intent =new Intent(LoginActivity.this,MainActivity.class);
@@ -104,8 +109,7 @@ public class LoginActivity extends Activity  {
 				}
 				@Override
 				public void onFailure(int statusCode, Header[] headers,
-						String responseString, Throwable throwable) {
-					// TODO Auto-generated method stub
+						Throwable throwable, JSONObject errorResponse) {
 					progressDialog.dismiss();
 					Log.e("TAG",throwable.getMessage());
 					Toast.makeText(LoginActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();

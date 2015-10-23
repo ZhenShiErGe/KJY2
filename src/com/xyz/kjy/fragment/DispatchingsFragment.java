@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.example.kjy.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.DispatchInfo;
 import com.xyz.kjy.net.HttpClientCenter;
@@ -92,9 +93,10 @@ public class DispatchingsFragment extends Fragment {
 					}
 				}
 			}
+			
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
-					String responseString, Throwable throwable) {
+					Throwable throwable, JSONObject errorResponse) {
 				Log.e("TAG",throwable.getMessage());
 				Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}
