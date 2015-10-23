@@ -231,9 +231,9 @@ public class MainActivity extends Activity implements OnClickListener{
 	private void updateCustomerData(){
 		
 		//显示正在登录处理对话窗
-		final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
-		progressDialog.setMessage(Constants.BeingUpdateCustomer);
-		progressDialog.show();
+//		final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
+//		progressDialog.setMessage(Constants.BeingUpdateCustomer);
+//		progressDialog.show();
 		//开始发送请求
 		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
 		if(HttpClientCenter.getCookie().size()!=0)
@@ -261,10 +261,10 @@ public class MainActivity extends Activity implements OnClickListener{
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
 					}
-					progressDialog.dismiss();
+//					progressDialog.dismiss();
 				}
 				else {
-					progressDialog.dismiss();
+//					progressDialog.dismiss();
 					try{
 						String errorMesg=response.getString("errorMesg");
 						Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
@@ -278,8 +278,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					String responseString, Throwable throwable) {
-				// TODO Auto-generated method stub
-				progressDialog.dismiss();
+//				progressDialog.dismiss();
 				Log.e("TAG",throwable.getMessage());
 				Toast.makeText(MainActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}

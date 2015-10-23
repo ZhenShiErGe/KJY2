@@ -82,8 +82,8 @@ public class StartDispatchActivity extends FragmentActivity {
 						Log.i("TAG",result+"");
 						if(result){
 			     			Intent intent =new Intent(StartDispatchActivity.this,MainActivity.class);
-			     			progressDialog.dismiss();
 			     			startActivity(intent);
+			     			progressDialog.dismiss();
 						}
 						else {
 							progressDialog.dismiss();

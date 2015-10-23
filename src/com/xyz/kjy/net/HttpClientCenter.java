@@ -12,14 +12,12 @@ import android.app.Application;
 
 public class HttpClientCenter extends Application {
 	private static AsyncHttpClient client;
-	private static SyncHttpClient syncClinet;
 	private static PersistentCookieStore cookieStore;
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		client=new AsyncHttpClient();
-		syncClinet=new SyncHttpClient();
 		cookieStore=new PersistentCookieStore(getApplicationContext());
 	}
 	
@@ -27,9 +25,6 @@ public class HttpClientCenter extends Application {
 		return client;
 	}
 	
-	public static SyncHttpClient getSyncHttpClient(){
-		return syncClinet;
-	}
 	
 	public static void saveCookie(AsyncHttpClient client){
 		client.setCookieStore(cookieStore);
