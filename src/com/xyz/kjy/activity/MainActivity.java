@@ -23,7 +23,6 @@ import com.xyz.kjy.fragment.DispatchingsFragment;
 import com.xyz.kjy.fragment.MeFragment;
 import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
-import com.zxing.activity.CaptureActivity;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -31,6 +30,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener{
 
+	private final static int SCANNIN_GREQUEST_CODE = 1;
 	/**
 	 * 主界面的tab相关
 	 */
@@ -130,8 +131,13 @@ public class MainActivity extends Activity implements OnClickListener{
 				final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
 				progressDialog.setMessage(Constants.BeingLoad);
 				progressDialog.show();
-				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
-				startActivity(scanIntent);
+//				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
+//				startActivity(scanIntent);
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, MipcaActivityCapture.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
+				
 				progressDialog.dismiss();
 			}
 		});
@@ -139,15 +145,29 @@ public class MainActivity extends Activity implements OnClickListener{
 	/**
 	 * 二维码扫描成功结果处理
 	 */
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		// TODO Auto-generated method stub
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if(resultCode==RESULT_OK){
+//			String result=data.getExtras().getString("result");
+//			System.out.println("result="+result);
+//		}
+//	}
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode==RESULT_OK){
-			String result=data.getExtras().getString("result");
-			System.out.println("result="+result);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+		case SCANNIN_GREQUEST_CODE:
+			if(resultCode == RESULT_OK){
+				String result=data.getExtras().getString("result");
+				Log.i("TAG", "result=="+result);
+//				System.out.println("result="+result);
+			}
+			break;
 		}
-	}
+    }	
+	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
