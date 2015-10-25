@@ -26,6 +26,7 @@
     <string name="unitPrice">单价</string>
     <string name="storeAddress">地址</string>
     <string name="callStorePhone">拨打电话</string>
+    <string name="putoff">开始卸货</string>
     
     <string name="dispatchInfo">配送信息</string>
     <string name="onDispatching">正在配送中</string>

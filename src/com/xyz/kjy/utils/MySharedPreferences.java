@@ -23,7 +23,7 @@ public class MySharedPreferences {
 		editor.putBoolean(key, value);
 		editor.commit();
 	}
-	public static boolean getString(Context context,String key,boolean defValue){
+	public static boolean getBoolean(Context context,String key,boolean defValue){
 		SharedPreferences sharedPreferences=context.getSharedPreferences(GLOBALFILENAME, Activity.MODE_PRIVATE);
 		return sharedPreferences.getBoolean(key, defValue);
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class MyCustomerOperate {
 	private SQLiteDatabase db=null;
@@ -25,6 +26,10 @@ public class MyCustomerOperate {
 		this.db.execSQL(sql, args);
 	}
 	
+	private void insert(Customer customer){
+		this.insertNoClose(customer);
+		this.db.close();
+	}
 	private void insertNoClose(List<Customer> customers){
 		for(Customer customer:customers){
 			this.insertNoClose(customer);
@@ -66,7 +71,27 @@ public class MyCustomerOperate {
 		return customers;
 	}
 	
-	
-	
+	/**
+	 * 查找Customer，没有返回null
+	 * @return
+	 */
+	public Customer findByStoreName(String storeName){
+		Customer customer=null;
+		String columns[] = new String[] {MyDatabaseHelper.STORENAME,
+				MyDatabaseHelper.STOREOWNERNAME,MyDatabaseHelper.PHONE,
+				MyDatabaseHelper.ADDRESS,MyDatabaseHelper.PRODUCTIONNAME,MyDatabaseHelper.UNITPRICE};
+		String[] args = {String.valueOf(storeName)};
+		Cursor cursor=this.db.query(MyDatabaseHelper.TABLENAME_CUSTOMER, columns,
+				MyDatabaseHelper.STORENAME+"=?", args,null, null,null);
+		int resultNum=cursor.getCount();
+		Log.i("TAG", "======================"+resultNum);
+		if(resultNum>0){
+			cursor.moveToFirst();
+			return new Customer(cursor.getString(0),cursor.getString(1),cursor.getString(2)
+					,cursor.getString(3),cursor.getString(4),cursor.getString(5));
+		}
+		this.db.close();
+		return customer;
+	}
 	
 }

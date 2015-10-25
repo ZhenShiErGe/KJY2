@@ -141,16 +141,46 @@ public class MainActivity extends Activity implements OnClickListener{
 		switch(requestCode){
 			case SCAN_CODE:
 				if(resultCode==RESULT_OK){
-					String result=data.getExtras().getString("result");
-					Log.i("TAG","result="+result);
+					String storeName=data.getExtras().getString("result").trim();
+					this.myCustomerOperate=new MyCustomerOperate(this.helper.getWritableDatabase());
+					Customer customer=this.myCustomerOperate.findByStoreName(storeName);
+					if(customer!=null){
+						Intent intent = new Intent(MainActivity.this, CustomerInfoActivity.class);
+						
+						intent.putExtra(MyDatabaseHelper.STORENAME, customer.getStoreName());
+						intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,customer.getStoreOwnerName());
+						intent.putExtra(MyDatabaseHelper.PHONE, customer.getPhone());			
+						intent.putExtra(MyDatabaseHelper.PRODUCTIONNAME, customer.getProductionName());
+						intent.putExtra(MyDatabaseHelper.ADDRESS,customer.getAddress());
+						intent.putExtra(MyDatabaseHelper.UNITPRICE, Integer.parseInt(customer.getUnitPrice().trim())/100+"");
+						
+						MainActivity.this.startActivity(intent);
+						MainActivity.this.overridePendingTransition(R.anim.push_left_in,
+								R.anim.push_left_out);
+					}else{
+//						updateCustomerDataAndGoto(storeName);
+						Intent intent = new Intent(MainActivity.this, CustomerInfoActivity.class);
+						intent.putExtra(MyDatabaseHelper.STORENAME, storeName);
+						intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,"暂无信息");
+						intent.putExtra(MyDatabaseHelper.PHONE, "暂无信息");			
+						intent.putExtra(MyDatabaseHelper.PRODUCTIONNAME, "暂无信息");
+						intent.putExtra(MyDatabaseHelper.ADDRESS,"暂无信息");
+						intent.putExtra(MyDatabaseHelper.UNITPRICE, "暂无信息");
+						
+						MainActivity.this.startActivity(intent);
+						MainActivity.this.overridePendingTransition(R.anim.push_left_in,
+								R.anim.push_left_out);
+					}
 				}else{
-					Log.i("TAG","result=error");
+					Log.i("TAG","扫描二维码失败");
+					Toast.makeText(MainActivity.this, "扫描商家信息失败", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			default:
 				break;
 		}
 	}
+
 
 	@Override
 	public void onClick(View v) {
@@ -213,8 +243,8 @@ public class MainActivity extends Activity implements OnClickListener{
 				Date lastUpDate;
 				lastUpDate = sdf.parse(str_lastUpdateDate);
 				Date currentDate=new Date();
-//				if(currentDate.getTime()-lastUpDate.getTime()>=2*24*60*60*1000){//每两天更新数据
-				if(true){//每次刷新都要更新数据
+				if(currentDate.getTime()-lastUpDate.getTime()>=5*24*60*60*1000){//每5天更新数据
+//				if(true){//每次刷新都要更新数据
 					MySharedPreferences.putString(this,"lastUpdateTime", sdf.format(currentDate));
 					updateCustomerData();
 				}
@@ -284,7 +314,79 @@ public class MainActivity extends Activity implements OnClickListener{
 			}
 		});
 	}
+	
+//	private void updateCustomerDataAndGoto(final String storeName) {
+//		// TODO Auto-generated method stub
+//		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+//		if(HttpClientCenter.getCookie().size()!=0)
+//			client.setCookieStore(HttpClientCenter.getCookieStore());
+//		client.get(Constants.CustomersURI, new JsonHttpResponseHandler(){
+//			@Override
+//			public void onSuccess(int statusCode, Header[] headers,
+//					JSONObject response) {
+//				boolean result=false;
+//				try{
+//					result=response.getBoolean("isSuccess");
+//				}catch(JSONException e){
+//					Log.e("TAG",e.getMessage());
+//					Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
+//				}
+//				if(result){
+//					try{
+//						String jsonString=response.getString("content");
+//						List<Customer> customers=JSONArray.parseArray(jsonString,Customer.class);
+//						MainActivity.this.myCustomerOperate=new MyCustomerOperate(
+//								MainActivity.this.helper.getWritableDatabase());
+//						MainActivity.this.myCustomerOperate.updateAll(customers);
+//						customersFragment.refresh();//更新数据后刷新数据列表
+//						
+//						MainActivity.this.myCustomerOperate=new MyCustomerOperate(
+//								MainActivity.this.helper.getWritableDatabase());
+//						Customer customer=MainActivity.this.myCustomerOperate.findByStoreName(storeName);
+//						Intent intent = new Intent(MainActivity.this, CustomerInfoActivity.class);
+//						intent.putExtra(MyDatabaseHelper.STORENAME, customer.getStoreName());
+//						intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,customer.getStoreOwnerName());
+//						intent.putExtra(MyDatabaseHelper.PHONE, customer.getPhone());			
+//						intent.putExtra(MyDatabaseHelper.PRODUCTIONNAME, customer.getProductionName());
+//						intent.putExtra(MyDatabaseHelper.ADDRESS,customer.getAddress());
+//						intent.putExtra(MyDatabaseHelper.UNITPRICE, customer.getUnitPrice());
+//
+//						MainActivity.this.startActivity(intent);
+//						MainActivity.this.overridePendingTransition(R.anim.push_left_in,
+//								R.anim.push_left_out);
+//					}catch(JSONException e){
+//						Log.e("TAG",e.getMessage());
+//						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
+//					}
+//				}
+//				else {
+//					try{
+//						String errorMesg=response.getString("errorMesg");
+////						Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+//						Intent intent = new Intent(MainActivity.this, CustomerInfoActivity.class);
+//						intent.putExtra(MyDatabaseHelper.STORENAME, storeName);
+//						intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,"暂无信息");
+//						intent.putExtra(MyDatabaseHelper.PHONE, "暂无信息");			
+//						intent.putExtra(MyDatabaseHelper.PRODUCTIONNAME, "暂无信息");
+//						intent.putExtra(MyDatabaseHelper.ADDRESS,"暂无信息");
+//						intent.putExtra(MyDatabaseHelper.UNITPRICE, "暂无信息");
+//					}catch(JSONException e){
+//						Log.e("TAG",e.getMessage());
+//						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
+//					}
+//				}
+//			}
+//			@Override
+//			public void onFailure(int statusCode, Header[] headers,
+//					Throwable throwable, JSONObject errorResponse) {
+//				Toast.makeText(MainActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//	}
+	
 }
+
+
 
 
 

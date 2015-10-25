@@ -22,6 +22,7 @@ public class CustomerInfoActivity extends FragmentActivity {
 	private TextView tvUnitPrice;
 	private TextView tvAddress;
 	private Button btnPhone;
+	private Button putOff;
 	
 	private ImageView backToMainActivity;
 	@Override
@@ -38,6 +39,7 @@ public class CustomerInfoActivity extends FragmentActivity {
 		tvUnitPrice=(TextView) findViewById(R.id.txt_unitprice);
 		tvAddress=(TextView) findViewById(R.id.txt_storeaddress);
 		btnPhone=(Button) findViewById(R.id.btn_callstore);
+		btnPhone=(Button) findViewById(R.id.btn_putoff);
 		backToMainActivity=(ImageView) findViewById(R.id.customerinfo_back_main);
 		
 		tvStoreName.setText(intent.getStringExtra(MyDatabaseHelper.STORENAME));
@@ -83,5 +85,14 @@ public class CustomerInfoActivity extends FragmentActivity {
 				dialog.show();
 			}
 		});
+		
+		btnPhone.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		
+		
 	}
 }
