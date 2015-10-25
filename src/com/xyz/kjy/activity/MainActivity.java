@@ -28,13 +28,10 @@ import com.zxing.activity.CaptureActivity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -50,10 +47,6 @@ public class MainActivity extends Activity implements OnClickListener{
 	private CustomersFragment customersFragment=new CustomersFragment();
 	private MeFragment meFragment=new MeFragment();;
 	private Fragment [] fragments;
-	
-//	private ImageView btnDispatching;
-//	private ImageView btnCustomer;
-//	private ImageView btnMe;
 	private ImageView btns[];
 	
 	int currentTabIndex;
@@ -129,14 +122,13 @@ public class MainActivity extends Activity implements OnClickListener{
 		btnScan.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				Toast toast=Toast.makeText(MainActivity.this, "正在加载", Toast.LENGTH_SHORT);
-				final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
-				progressDialog.setMessage(Constants.BeingLoad);
-				progressDialog.show();
+				Toast.makeText(MainActivity.this, "正在加载", Toast.LENGTH_SHORT).show();
+//				final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
+//				progressDialog.setMessage(Constants.BeingLoad);
+//				progressDialog.show();
 				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
 				startActivityForResult(scanIntent,SCAN_CODE);
-				
-				progressDialog.dismiss();
+//				progressDialog.dismiss();
 			}
 		});
 	}

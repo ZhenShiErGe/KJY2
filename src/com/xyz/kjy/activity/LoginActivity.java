@@ -87,15 +87,11 @@ public class LoginActivity extends Activity  {
 						Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
 					}
 					if(result){
-//						MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
 		        		MySharedPreferences.putString(LoginActivity.this,Constants.UserName, userName);
-//		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, password);
-//		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, DES.md5Pwd(password));
 		     			MySharedPreferences.putBoolean(LoginActivity.this,Constants.UserIsLogin,true);
 		     			Intent intent =new Intent(LoginActivity.this,MainActivity.class);
 		     			startActivity(intent);
 		     			progressDialog.dismiss();
-		     			
 					}
 					else {
 						progressDialog.dismiss();

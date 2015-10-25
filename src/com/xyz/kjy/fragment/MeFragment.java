@@ -47,6 +47,7 @@ public class MeFragment extends Fragment{
 	private TextView tv_updatepsw;
 	private TextView tv_printerset;
 	private TextView tv_updateversion;
+	private TextView tv_aboutus;
 	private Button btn_logout;
 
 	@Override
@@ -63,6 +64,7 @@ public class MeFragment extends Fragment{
 			tv_updatepsw=(TextView) layout.findViewById(R.id.txt_updatepsw);
 			tv_printerset=(TextView) layout.findViewById(R.id.txt_printerset);
 			tv_updateversion=(TextView) layout.findViewById(R.id.txt_updateversion);
+			tv_aboutus=(TextView) layout.findViewById(R.id.txt_aboutus);
 			btn_logout=(Button) layout.findViewById(R.id.btnexit);
 			initClickers();
 		}else {
@@ -93,7 +95,6 @@ public class MeFragment extends Fragment{
 		tv_updateversion.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -102,7 +103,12 @@ public class MeFragment extends Fragment{
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
+				
+			}
+		});
+		tv_aboutus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
 				
 			}
 		});

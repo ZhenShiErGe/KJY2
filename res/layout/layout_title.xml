@@ -17,6 +17,8 @@
         android:src="@drawable/icon_add" />
     
     <!-- app中间地址搜索栏目框 -->
+    
+    <!-- 
    <TextView
          android:id="@+id/tv_common_above_head"
         android:layout_width="wrap_content"
@@ -24,10 +26,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:scaleType="centerInside"
-        android:text="车牌号选择"
+        android:text="@string/app_name"
         android:background="@drawable/abc_spinner_ab_default_holo_light"
         android:gravity="center"
         android:textColor="#fff" />
+    -->
+       <TextView
+         android:id="@+id/tv_common_above_head"
+        style="@style/txt_titleStyle1"
+        android:text="@string/app_name"
+        android:layout_centerInParent="true"  />
+   
 	
 	<!-- app右侧侧搜索栏目框 -->
 

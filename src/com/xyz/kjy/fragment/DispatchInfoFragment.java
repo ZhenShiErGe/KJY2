@@ -52,6 +52,7 @@ public class DispatchInfoFragment extends Fragment {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+			System.out.println("初始化fragment_dispatchinfo一次");
 			ctx=this.getActivity();
 			currentView = inflater.inflate(R.layout.fragment_dispachinfo,container,false);
 			
