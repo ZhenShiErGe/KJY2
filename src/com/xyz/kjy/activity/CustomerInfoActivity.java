@@ -28,6 +28,8 @@ public class CustomerInfoActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_customerinfo);
+		//在所有activity中添加该行代码，用于需要时退出应用程序
+		SystemApplication.getInstance().addActivity(this);
 		Intent intent=this.getIntent();
 		
 		tvStoreName=(TextView) findViewById(R.id.txt_storename);

@@ -13,34 +13,143 @@ package com.xyz.kjy.fragment;
 
 
 
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.kjy.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xyz.kjy.activity.LoginActivity;
+import com.xyz.kjy.activity.SystemApplication;
+import com.xyz.kjy.constant.Constants;
+import com.xyz.kjy.net.HttpClientCenter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class MeFragment extends Fragment{
+	private Activity ctx;
+	private View layout;
 	
-	private View currentView;
-
-
-	public void setCurrentViewPararms(FrameLayout.LayoutParams layoutParams) {
-		currentView.setLayoutParams(layoutParams);
-	}
-
+	private TextView tv_userinfo;
+	private TextView tv_updatepsw;
+	private TextView tv_printerset;
+	private TextView tv_updateversion;
+	private Button btn_logout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		currentView = inflater.inflate(R.layout.fragment_setting,
-				container, false);
-		return currentView;
+		
+		System.out.println("初始化fragment_me一次");
+		if (layout == null) {
+			ctx = this.getActivity();
+			layout = ctx.getLayoutInflater().inflate(R.layout.fragment_setting,
+					null);
+			tv_userinfo=(TextView) layout.findViewById(R.id.txt_userinfo);
+			tv_updatepsw=(TextView) layout.findViewById(R.id.txt_updatepsw);
+			tv_printerset=(TextView) layout.findViewById(R.id.txt_printerset);
+			tv_updateversion=(TextView) layout.findViewById(R.id.txt_updateversion);
+			btn_logout=(Button) layout.findViewById(R.id.btnexit);
+			initClickers();
+		}else {
+			ViewGroup parent = (ViewGroup) layout.getParent();
+			if (parent != null) {
+				parent.removeView(layout);
+			}
+		}
+		return layout;
+	}
+
+
+	private void initClickers() {
+		tv_userinfo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		
+		tv_updatepsw.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		
+		tv_updateversion.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		tv_printerset.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btn_logout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				final ProgressDialog progressDialog=new ProgressDialog(ctx);
+				progressDialog.setMessage(Constants.BeingLogout);
+				progressDialog.show();
+				//开始发送请求
+				AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+				if(HttpClientCenter.getCookie().size()!=0)
+					client.setCookieStore(HttpClientCenter.getCookieStore());
+				client.post(Constants.LogoutURI,new JsonHttpResponseHandler(){
+					@Override
+					public void onSuccess(int statusCode, Header[] headers,JSONObject response) {
+						boolean result=false;
+						try{
+							result=response.getBoolean("isSuccess");
+						}catch(JSONException e){
+							Log.e("TAG","内部错误："+e.getMessage());
+							Toast.makeText(ctx, "登出失败", Toast.LENGTH_SHORT).show();
+						}
+						if(result){
+			     			SystemApplication.getInstance().exit();
+			     			progressDialog.dismiss();
+						}
+						else {
+							progressDialog.dismiss();
+							try{
+								String errorMesg=response.getString("errorMesg");
+								Toast.makeText(ctx, "登出失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+							}catch(JSONException e){
+								Log.e("TAG","内部错误："+e.getMessage());
+								Toast.makeText(ctx, "登出失败", Toast.LENGTH_SHORT).show();
+							}
+						}
+					}
+					@Override
+					public void onFailure(int statusCode, Header[] headers,
+							Throwable throwable, JSONObject errorResponse) {
+						progressDialog.dismiss();
+						Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();
+					}
+				});
+			}
+		});
 	}
 
 

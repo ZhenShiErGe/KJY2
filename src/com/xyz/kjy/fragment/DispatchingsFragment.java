@@ -97,7 +97,7 @@ public class DispatchingsFragment extends Fragment {
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					Throwable throwable, JSONObject errorResponse) {
-				Log.e("TAG",throwable.getMessage());
+//				Log.e("TAG",throwable.getMessage());
 				Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}
 		});

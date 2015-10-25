@@ -35,6 +35,8 @@ public class LoginActivity extends Activity  {
 	public void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_login);
 		super.onCreate(savedInstanceState);
+		//在所有activity中添加该行代码，用于需要时退出应用程序
+		SystemApplication.getInstance().addActivity(this);
 		init();
 	}
 	private void init() {
@@ -85,7 +87,6 @@ public class LoginActivity extends Activity  {
 						Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
 					}
 					if(result){
-						String cookie=getCookieFromHeaders(headers);
 //						MySharedPreferences.putString(LoginActivity.this,Constants.Cookie ,cookie);
 		        		MySharedPreferences.putString(LoginActivity.this,Constants.UserName, userName);
 //		     			MySharedPreferences.putString(LoginActivity.this,Constants.UserPass, password);
@@ -111,7 +112,7 @@ public class LoginActivity extends Activity  {
 				public void onFailure(int statusCode, Header[] headers,
 						Throwable throwable, JSONObject errorResponse) {
 					progressDialog.dismiss();
-					Log.e("TAG",throwable.getMessage());
+//					Log.e("TAG",throwable.getMessage());
 					Toast.makeText(LoginActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 				}
 			});

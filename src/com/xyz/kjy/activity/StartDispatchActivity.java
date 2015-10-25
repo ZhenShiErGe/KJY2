@@ -36,7 +36,9 @@ public class StartDispatchActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_startdispatch);
-		
+		//在所有activity中添加该行代码，用于需要时退出应用程序
+		SystemApplication.getInstance().addActivity(this);
+				
 		tvDispatchPerson=(TextView) findViewById(R.id.txt_dispatchPerson);
 		tvDispatchCar=(EditText) findViewById(R.id.txt_dispatchCar);
 		startDispatch=(Button) findViewById(R.id.btn_dispatchStart);
@@ -102,7 +104,7 @@ public class StartDispatchActivity extends FragmentActivity {
 					public void onFailure(int statusCode, Header[] headers,
 							Throwable throwable, JSONObject errorResponse) {
 						progressDialog.dismiss();
-						Log.e("TAG",throwable.getMessage());
+//						Log.e("TAG",throwable.getMessage());
 						Toast.makeText(StartDispatchActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 					}
 				});

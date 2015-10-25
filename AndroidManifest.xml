@@ -33,14 +33,22 @@
             </intent-filter>
         </activity>
         
-       
+       <!-- 
         <activity
             android:name="com.xyz.kjy.activity.MipcaActivityCapture"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
+         -->
+         
+         <activity    android:name="com.zxing.activity.CaptureActivity"
+             android:windowSoftInputMode="stateAlwaysHidden"
+             android:configChanges="orientation|keyboardHidden"
+             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+             
+         </activity>
         <activity android:name="com.xyz.kjy.activity.CustomerInfoActivity"/>
         <activity android:name="com.xyz.kjy.activity.MainActivity"/>
         <activity android:name="com.xyz.kjy.activity.StartDispatchActivity"/>

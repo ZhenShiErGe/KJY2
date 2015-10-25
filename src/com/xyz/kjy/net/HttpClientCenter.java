@@ -6,7 +6,6 @@ import org.apache.http.cookie.Cookie;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
-import com.loopj.android.http.SyncHttpClient;
 
 import android.app.Application;
 
@@ -18,12 +17,12 @@ public class HttpClientCenter extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		client=new AsyncHttpClient();
-		client.setTimeout(5000);
+		client.setTimeout(4000);
 //		client.setMaxRetriesAndTimeout(1, 3000);
 		cookieStore=new PersistentCookieStore(getApplicationContext());
 	}
 
-	public static AsyncHttpClient getAsyncHttpClient(){
+	public synchronized static AsyncHttpClient getAsyncHttpClient(){
 		return client;
 	}
 	

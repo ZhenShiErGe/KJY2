@@ -23,6 +23,7 @@ import com.xyz.kjy.fragment.DispatchingsFragment;
 import com.xyz.kjy.fragment.MeFragment;
 import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
+import com.zxing.activity.CaptureActivity;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -41,7 +42,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener{
 
-	private final static int SCANNIN_GREQUEST_CODE = 1;
+	private final static int SCAN_CODE = 1;
 	/**
 	 * 主界面的tab相关
 	 */
@@ -71,6 +72,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//在所有activity中添加该行代码，用于需要时退出应用程序
+		SystemApplication.getInstance().addActivity(this);
 		initTabs();
 		initScan();
 		initAddDispitchBtn();
@@ -113,7 +116,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				else{
 					Intent intent=new Intent(MainActivity.this,StartDispatchActivity.class);
 					//跳转到新的activity，在这里选择配送的具体信息
-					 startActivity(intent);
+					 startActivityForResult(intent,SCAN_CODE);
 				}
 			}
 		});
@@ -126,17 +129,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		btnScan.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 //				Toast toast=Toast.makeText(MainActivity.this, "正在加载", Toast.LENGTH_SHORT);
 				final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
 				progressDialog.setMessage(Constants.BeingLoad);
 				progressDialog.show();
-//				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
-//				startActivity(scanIntent);
-				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, MipcaActivityCapture.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
+				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
+				startActivityForResult(scanIntent,SCAN_CODE);
 				
 				progressDialog.dismiss();
 			}
@@ -145,34 +143,25 @@ public class MainActivity extends Activity implements OnClickListener{
 	/**
 	 * 二维码扫描成功结果处理
 	 */
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		// TODO Auto-generated method stub
-//		super.onActivityResult(requestCode, resultCode, data);
-//		if(resultCode==RESULT_OK){
-//			String result=data.getExtras().getString("result");
-//			System.out.println("result="+result);
-//		}
-//	}
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-		case SCANNIN_GREQUEST_CODE:
-			if(resultCode == RESULT_OK){
-				String result=data.getExtras().getString("result");
-				Log.i("TAG", "result=="+result);
-//				System.out.println("result="+result);
-			}
-			break;
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode){
+			case SCAN_CODE:
+				if(resultCode==RESULT_OK){
+					String result=data.getExtras().getString("result");
+					Log.i("TAG","result="+result);
+				}else{
+					Log.i("TAG","result=error");
+				}
+				break;
+			default:
+				break;
 		}
-    }	
-	
+	}
+
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-	
-		
 		if(v.getId()==R.id.re_weixin)
 		{
 			destTabIndex=0;
@@ -239,7 +228,6 @@ public class MainActivity extends Activity implements OnClickListener{
 				}
 			} 
 			catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
@@ -299,7 +287,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			public void onFailure(int statusCode, Header[] headers,
 					Throwable throwable, JSONObject errorResponse) {
 //				progressDialog.dismiss();
-				Log.e("TAG",throwable.getMessage());
+//				Log.e("TAG",throwable.getMessage());
 				Toast.makeText(MainActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}
 		});
