@@ -24,6 +24,7 @@ import com.xyz.kjy.activity.LoginActivity;
 import com.xyz.kjy.activity.SystemApplication;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
+import com.xyz.kjy.utils.MySharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -133,6 +134,7 @@ public class MeFragment extends Fragment{
 							Toast.makeText(ctx, "登出失败", Toast.LENGTH_SHORT).show();
 						}
 						if(result){
+							MySharedPreferences.putBoolean(ctx, Constants.UserIsLogin,false);
 			     			SystemApplication.getInstance().exit();
 			     			progressDialog.dismiss();
 						}

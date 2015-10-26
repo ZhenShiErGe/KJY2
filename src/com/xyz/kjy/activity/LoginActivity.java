@@ -37,7 +37,15 @@ public class LoginActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		//在所有activity中添加该行代码，用于需要时退出应用程序
 		SystemApplication.getInstance().addActivity(this);
-		init();
+		boolean isLogin=MySharedPreferences.getBoolean(LoginActivity.this,Constants.UserIsLogin,false);
+		if(isLogin){
+			Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+ 			startActivity(intent);
+		}else{
+			init();
+		}
+			
+		
 	}
 	private void init() {
 		btn_login = (Button) findViewById(R.id.btn_login);
