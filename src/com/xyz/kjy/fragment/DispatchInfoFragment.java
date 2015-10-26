@@ -1,20 +1,14 @@
 package com.xyz.kjy.fragment;
 
-import java.util.List;
 
 import org.apache.http.Header;
-import org.apache.http.client.HttpClient;
-import org.apache.http.cookie.Cookie;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xyz.kjy.activity.CustomerInfoActivity;
-import com.xyz.kjy.activity.LoginActivity;
 import com.xyz.kjy.activity.MainActivity;
-import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
@@ -26,7 +20,6 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

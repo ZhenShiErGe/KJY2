@@ -9,6 +9,7 @@ public class Constants {
 	public static final String DispatchStartURI="http://financialsys.coding.io/dispatch/doStart.json";
 	public static final String DispatchOverURI="http://financialsys.coding.io/dispatch/doEnd.json";
 	public static final String LogoutURI="http://financialsys.coding.io/doLogout.json";
+	public static final String SendMessURI="http://financialsys.coding.io/dispatchRecord/doAdd.json";
 //	public static final String Cookie="cookie";
 	public static final String UserIsLogin="isLogin";
 	public static final String UserName="userName";
