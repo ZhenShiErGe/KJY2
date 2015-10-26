@@ -1,9 +1,13 @@
 package com.xyz.kjy.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -18,17 +22,22 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class StartDispatchActivity extends FragmentActivity {
 	private TextView tvDispatchPerson;
-	private EditText tvDispatchCar;
+	private Spinner tvDispatchCar;
 	private Button startDispatch;
 	private ImageView backToMainActivity;
+	
+	private List<CharSequence> dataCarNum=null;
+	private ArrayAdapter<CharSequence> adapterCarNum=null;
 	//点击确认即可添加新的配送信息（注意同一个时间一个用户只能有一个正在配送的记录）
 	//添加成功后返回到主页面
 	
@@ -40,31 +49,45 @@ public class StartDispatchActivity extends FragmentActivity {
 		SystemApplication.getInstance().addActivity(this);
 				
 		tvDispatchPerson=(TextView) findViewById(R.id.txt_dispatchPerson);
-		tvDispatchCar=(EditText) findViewById(R.id.txt_dispatchCar);
+		
 		startDispatch=(Button) findViewById(R.id.btn_dispatchStart);
 		backToMainActivity=(ImageView) findViewById(R.id.startdispatch_back_main);
 		
-		tvDispatchPerson.setText(MySharedPreferences.getString(StartDispatchActivity.this,
-				Constants.UserName, ""));
+		//设置车辆下拉框有关信息
+		this.dataCarNum=new ArrayList<CharSequence>();
+		String carNumString=this.getIntent().getStringExtra("carNums");
+		
+		List<String> carNums=JSONArray.parseArray(carNumString, String.class);
+		for(String carNum:carNums)
+			this.dataCarNum.add(carNum);
+		this.adapterCarNum=new ArrayAdapter<CharSequence>
+		(StartDispatchActivity.this, android.R.layout.simple_spinner_item,this.dataCarNum);
+		this.adapterCarNum.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		tvDispatchCar=(Spinner) findViewById(R.id.txt_dispatchCar);
+		this.tvDispatchCar.setPrompt("请选择车辆");
+		this.tvDispatchCar.setAdapter(this.adapterCarNum);
+		
+		
 		backToMainActivity.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				
 				StartDispatchActivity.this.finish();
 				StartDispatchActivity.this.overridePendingTransition(R.anim.push_right_in,
 						R.anim.push_right_out);
 			}
 		});
 		
+		tvDispatchPerson.setText(MySharedPreferences.getString(StartDispatchActivity.this,
+				Constants.UserName, ""));
 		startDispatch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				
 				//需要发送的参数
 				RequestParams params=new RequestParams();
-				params.put("carNum", tvDispatchCar.getText().toString().trim());
-				Log.i("TAG",tvDispatchCar.getText().toString());
+				params.put("carNum",(String)tvDispatchCar.getSelectedItem());
+				
+				Log.i("TAG", (String)tvDispatchCar.getSelectedItem());
 				//显示正在登录处理对话窗
 				final ProgressDialog progressDialog=new ProgressDialog(StartDispatchActivity.this);
 				progressDialog.setMessage(Constants.BeingStartDispatch);
@@ -110,5 +133,6 @@ public class StartDispatchActivity extends FragmentActivity {
 				});
 			}
 		});
+		
 	}
 }

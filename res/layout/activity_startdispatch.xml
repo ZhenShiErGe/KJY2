@@ -35,7 +35,7 @@
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
             android:background="@color/black2" />
-
+<!--  
          <EditText
                 android:id="@+id/txt_dispatchCar"
                 android:layout_width="match_parent"
@@ -48,6 +48,11 @@
                 android:maxLength="11"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
+         -->
+         <Spinner android:id="@+id/txt_dispatchCar"
+             android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+             />
          
       
       

@@ -3,6 +3,7 @@ package com.xyz.kjy.activity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -107,13 +108,14 @@ public class MainActivity extends Activity implements OnClickListener{
 					Toast.makeText(MainActivity.this, "已经在配送", Toast.LENGTH_SHORT).show();
 				}
 				else{
-					Intent intent=new Intent(MainActivity.this,StartDispatchActivity.class);
-					//跳转到新的activity，在这里选择配送的具体信息
-					 startActivityForResult(intent,SCAN_CODE);
+					startDispatchActivity();
 				}
 			}
 		});
 	}
+
+
+
 	/**
 	 * 定义二维码扫描项
 	 */
@@ -127,6 +129,7 @@ public class MainActivity extends Activity implements OnClickListener{
 //				progressDialog.setMessage(Constants.BeingLoad);
 //				progressDialog.show();
 				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
+				scanIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivityForResult(scanIntent,SCAN_CODE);
 //				progressDialog.dismiss();
 			}
@@ -314,7 +317,54 @@ public class MainActivity extends Activity implements OnClickListener{
 			}
 		});
 	}
-	
+	private void startDispatchActivity() {
+		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+		if(HttpClientCenter.getCookie().size()!=0)
+			client.setCookieStore(HttpClientCenter.getCookieStore());
+		client.get(Constants.AllCarURI, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				boolean result=false;
+				try{
+					result=response.getBoolean("isSuccess");
+				}catch(JSONException e){
+					Log.e("TAG",e.getMessage());
+					Toast.makeText(MainActivity.this, "获取车辆信息失败", Toast.LENGTH_SHORT).show();
+				}
+				if(result){
+					try{
+						String jsonString=response.getString("content");
+						Intent intent=new Intent(MainActivity.this,StartDispatchActivity.class);
+						intent.putExtra("carNums", jsonString);
+						startActivity(intent);
+					}catch(JSONException e){
+						Log.e("TAG",e.getMessage());
+						Toast.makeText(MainActivity.this, "获取车辆信息失败", Toast.LENGTH_SHORT).show();
+					}
+//					progressDialog.dismiss();
+				}
+				else {
+//					progressDialog.dismiss();
+					try{
+						String errorMesg=response.getString("errorMesg");
+						Toast.makeText(MainActivity.this, "获取车辆信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+					}catch(JSONException e){
+						Log.e("TAG",e.getMessage());
+						Toast.makeText(MainActivity.this, "获取车辆信息失败", Toast.LENGTH_SHORT).show();
+					}
+					
+				}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					Throwable throwable, JSONObject errorResponse) {
+//				progressDialog.dismiss();
+//				Log.e("TAG",throwable.getMessage());
+				Toast.makeText(MainActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 //	private void updateCustomerDataAndGoto(final String storeName) {
 //		// TODO Auto-generated method stub
 //		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
