@@ -43,5 +43,6 @@
     <string name="money">现金</string>
     <string name="debt">欠款</string>
     <string name="sendMess">发送信息</string>
+    <string name="payok">完成</string>
 
 </resources>

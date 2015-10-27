@@ -131,6 +131,8 @@ public class MainActivity extends Activity implements OnClickListener{
 				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
 				scanIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivityForResult(scanIntent,SCAN_CODE);
+				MainActivity.this.overridePendingTransition(R.anim.push_left_in,
+						R.anim.push_left_out);
 //				progressDialog.dismiss();
 			}
 		});
@@ -338,14 +340,14 @@ public class MainActivity extends Activity implements OnClickListener{
 						Intent intent=new Intent(MainActivity.this,StartDispatchActivity.class);
 						intent.putExtra("carNums", jsonString);
 						startActivity(intent);
+						MainActivity.this.overridePendingTransition(R.anim.push_right_in,
+								R.anim.push_right_out);
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(MainActivity.this, "获取车辆信息失败", Toast.LENGTH_SHORT).show();
 					}
-//					progressDialog.dismiss();
 				}
 				else {
-//					progressDialog.dismiss();
 					try{
 						String errorMesg=response.getString("errorMesg");
 						Toast.makeText(MainActivity.this, "获取车辆信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();

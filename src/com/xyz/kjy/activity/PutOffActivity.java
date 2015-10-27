@@ -83,7 +83,7 @@ public class PutOffActivity extends Activity {
 		});
 	}
 
-	private void sendMessage(String storeName,String outNum,String returnNum,String settleType) {
+	private void sendMessage(final String storeName,String outNum,String returnNum,final String settleType) {
 		RequestParams params=new RequestParams();
 		params.put("storeName", storeName);
 		params.put("productionOutNo",outNum);
@@ -104,13 +104,24 @@ public class PutOffActivity extends Activity {
 					Toast.makeText(PutOffActivity.this, "发送信息失败", Toast.LENGTH_SHORT).show();
 				}
 				if(result){
-					Intent intent=new Intent(PutOffActivity.this,MainActivity.class);
-					startActivity(intent);
+					try{
+						String jsonString=response.getString("content");
+						JSONObject json=new JSONObject(jsonString);
+						String payNum=json.getString("totalMoney");
+						Log.i("TAG",payNum);
+						Intent intent=new Intent(PutOffActivity.this,PayActivity.class);
+						intent.putExtra("payType", Integer.parseInt(settleType));
+						intent.putExtra("payNum", Integer.parseInt(payNum));
+						intent.putExtra("storeName", storeName);
+						startActivity(intent);
+					}catch(JSONException e){
+						Log.e("TAG",e.getMessage());
+					}
 				}
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(PutOffActivity.this, "发送信息失败", Toast.LENGTH_SHORT).show();
+						Toast.makeText(PutOffActivity.this, "发送信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(PutOffActivity.this, "发送信息失败", Toast.LENGTH_SHORT).show();
@@ -121,7 +132,6 @@ public class PutOffActivity extends Activity {
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					Throwable throwable, JSONObject errorResponse) {
-//				Log.e("TAG",throwable.getMessage());
 				Toast.makeText(PutOffActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			}
 		});

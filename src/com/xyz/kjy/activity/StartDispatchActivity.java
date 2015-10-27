@@ -72,8 +72,8 @@ public class StartDispatchActivity extends FragmentActivity {
 			@Override
 			public void onClick(View arg0) {
 				StartDispatchActivity.this.finish();
-				StartDispatchActivity.this.overridePendingTransition(R.anim.push_right_in,
-						R.anim.push_right_out);
+				StartDispatchActivity.this.overridePendingTransition(R.anim.push_left_in,
+						R.anim.push_left_out);
 			}
 		});
 		
