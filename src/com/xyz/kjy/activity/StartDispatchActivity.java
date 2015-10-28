@@ -115,10 +115,12 @@ public class StartDispatchActivity extends FragmentActivity {
 							progressDialog.dismiss();
 							try{
 								String errorMesg=response.getString("errorMesg");
-								Toast.makeText(StartDispatchActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
-								if("未登录，请先登录".equals(errorMesg)){
+								if("未登陆，请先登陆".equals(errorMesg)){
+									MySharedPreferences.putBoolean(StartDispatchActivity.this, Constants.UserIsLogin, false);
 									Intent intent=new Intent(StartDispatchActivity.this,LoginActivity.class);
 									startActivity(intent);
+								}else{
+									Toast.makeText(StartDispatchActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
 								}
 							}catch(JSONException e){
 								Log.e("TAG","内部错误："+e.getMessage());

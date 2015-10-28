@@ -10,6 +10,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.MyDatabaseHelper;
 import com.xyz.kjy.net.HttpClientCenter;
+import com.xyz.kjy.utils.MySharedPreferences;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -136,10 +137,12 @@ public class CustomerInfoActivity extends FragmentActivity {
 						else {
 							try{
 								String errorMesg=response.getString("errorMesg");
-								Toast.makeText(CustomerInfoActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
-								if("未登录，请先登录".equals(errorMesg)){
+								if("未登陆，请先登陆".equals(errorMesg)){
+									MySharedPreferences.putBoolean(CustomerInfoActivity.this,Constants.UserIsLogin, false);
 									Intent intent=new Intent(CustomerInfoActivity.this,LoginActivity.class);
 									startActivity(intent);
+								}else{
+									Toast.makeText(CustomerInfoActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
 								}
 							}catch(JSONException e){
 								Log.e("TAG",e.getMessage());

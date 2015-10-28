@@ -10,10 +10,12 @@ import com.example.kjy.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xyz.kjy.activity.CustomerInfoActivity;
 import com.xyz.kjy.activity.LoginActivity;
+import com.xyz.kjy.activity.PutOffActivity;
 import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.DispatchInfo;
 import com.xyz.kjy.net.HttpClientCenter;
+import com.xyz.kjy.utils.MySharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -89,10 +91,12 @@ public class DispatchingsFragment extends Fragment {
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(ctx, errorMesg, Toast.LENGTH_SHORT).show();
-						if("未登录，请先登录".equals(errorMesg)){
+						if("未登陆，请先登陆".equals(errorMesg)){
+							MySharedPreferences.putBoolean(ctx, Constants.UserIsLogin, false);
 							Intent intent=new Intent(ctx,LoginActivity.class);
 							startActivity(intent);
+						}else{
+							Toast.makeText(ctx, errorMesg, Toast.LENGTH_SHORT).show();
 						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());

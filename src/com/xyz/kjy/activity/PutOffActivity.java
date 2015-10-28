@@ -11,6 +11,7 @@ import com.loopj.android.http.RequestParams;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.MyDatabaseHelper;
 import com.xyz.kjy.net.HttpClientCenter;
+import com.xyz.kjy.utils.MySharedPreferences;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -121,10 +122,12 @@ public class PutOffActivity extends Activity {
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(PutOffActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
-						if("未登录，请先登录".equals(errorMesg)){
+						if("未登陆，请先登陆".equals(errorMesg)){
+							MySharedPreferences.putBoolean(PutOffActivity.this, Constants.UserIsLogin, false);
 							Intent intent=new Intent(PutOffActivity.this,LoginActivity.class);
 							startActivity(intent);
+						}else{
+							Toast.makeText(PutOffActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
 						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());

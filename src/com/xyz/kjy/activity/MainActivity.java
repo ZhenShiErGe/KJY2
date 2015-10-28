@@ -296,17 +296,16 @@ public class MainActivity extends Activity implements OnClickListener{
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();
 					}
-//					progressDialog.dismiss();
 				}
 				else {
-//					progressDialog.dismiss();
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
-						Log.i("TAG",errorMesg);
-						if("未登录，请先登录".equals(errorMesg)){
+						if("未登陆，请先登陆".equals(errorMesg)){
+							MySharedPreferences.putBoolean(MainActivity.this,Constants.UserIsLogin, false);
 							Intent intent=new Intent(MainActivity.this,LoginActivity.class);
 							startActivity(intent);
+						}else{
+							Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
 						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
@@ -355,11 +354,12 @@ public class MainActivity extends Activity implements OnClickListener{
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
-						Log.i("TAG", errorMesg);
-						if("未登录，请先登录".equals(errorMesg)){
+						if("未登陆，请先登陆".equals(errorMesg)){
+							MySharedPreferences.putBoolean(MainActivity.this,Constants.UserIsLogin, false);
 							Intent intent=new Intent(MainActivity.this,LoginActivity.class);
 							startActivity(intent);
+						}else{
+							Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
 						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
