@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xyz.kjy.activity.CustomerInfoActivity;
+import com.xyz.kjy.activity.LoginActivity;
 import com.xyz.kjy.activity.MainActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
@@ -116,7 +118,11 @@ public class DispatchInfoFragment extends Fragment {
 					progressDialog.dismiss();
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(ctx, "结束配送失败："+errorMesg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(ctx, errorMesg, Toast.LENGTH_SHORT).show();
+						if("未登录，请先登录".equals(errorMesg)){
+							Intent intent=new Intent(ctx,LoginActivity.class);
+							startActivity(intent);
+						}
 					}catch(JSONException e){
 						Log.e("TAG","内部错误："+e.getMessage());
 						Toast.makeText(ctx, "结束配送失败", Toast.LENGTH_SHORT).show();

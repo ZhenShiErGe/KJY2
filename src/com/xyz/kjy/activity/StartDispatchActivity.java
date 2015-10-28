@@ -115,7 +115,11 @@ public class StartDispatchActivity extends FragmentActivity {
 							progressDialog.dismiss();
 							try{
 								String errorMesg=response.getString("errorMesg");
-								Toast.makeText(StartDispatchActivity.this, "创建配送记录失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+								Toast.makeText(StartDispatchActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+								if("未登录，请先登录".equals(errorMesg)){
+									Intent intent=new Intent(StartDispatchActivity.this,LoginActivity.class);
+									startActivity(intent);
+								}
 							}catch(JSONException e){
 								Log.e("TAG","内部错误："+e.getMessage());
 								Toast.makeText(StartDispatchActivity.this, "创建配送记录失败", Toast.LENGTH_SHORT).show();

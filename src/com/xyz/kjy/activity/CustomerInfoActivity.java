@@ -136,7 +136,11 @@ public class CustomerInfoActivity extends FragmentActivity {
 						else {
 							try{
 								String errorMesg=response.getString("errorMesg");
-								Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+								Toast.makeText(CustomerInfoActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+								if("未登录，请先登录".equals(errorMesg)){
+									Intent intent=new Intent(CustomerInfoActivity.this,LoginActivity.class);
+									startActivity(intent);
+								}
 							}catch(JSONException e){
 								Log.e("TAG",e.getMessage());
 								Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();

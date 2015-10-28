@@ -302,7 +302,11 @@ public class MainActivity extends Activity implements OnClickListener{
 //					progressDialog.dismiss();
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(MainActivity.this, "商家信息更新失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+						if("未登录，请先登录".equals(errorMesg)){
+							Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+							startActivity(intent);
+						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(MainActivity.this, "商家信息更新失败", Toast.LENGTH_SHORT).show();

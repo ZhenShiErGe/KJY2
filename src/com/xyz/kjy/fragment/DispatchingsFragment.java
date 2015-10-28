@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import com.example.kjy.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xyz.kjy.activity.CustomerInfoActivity;
+import com.xyz.kjy.activity.LoginActivity;
 import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.DispatchInfo;
@@ -17,6 +19,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -86,7 +89,11 @@ public class DispatchingsFragment extends Fragment {
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(ctx, "获取配送信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(ctx, errorMesg, Toast.LENGTH_SHORT).show();
+						if("未登录，请先登录".equals(errorMesg)){
+							Intent intent=new Intent(ctx,LoginActivity.class);
+							startActivity(intent);
+						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(ctx, "获取配送信息失败", Toast.LENGTH_SHORT).show();

@@ -121,7 +121,11 @@ public class PutOffActivity extends Activity {
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(PutOffActivity.this, "发送信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(PutOffActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+						if("未登录，请先登录".equals(errorMesg)){
+							Intent intent=new Intent(PutOffActivity.this,LoginActivity.class);
+							startActivity(intent);
+						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(PutOffActivity.this, "发送信息失败", Toast.LENGTH_SHORT).show();
