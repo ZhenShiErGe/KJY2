@@ -303,6 +303,7 @@ public class MainActivity extends Activity implements OnClickListener{
 					try{
 						String errorMesg=response.getString("errorMesg");
 						Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+						Log.i("TAG",errorMesg);
 						if("未登录，请先登录".equals(errorMesg)){
 							Intent intent=new Intent(MainActivity.this,LoginActivity.class);
 							startActivity(intent);
@@ -354,7 +355,12 @@ public class MainActivity extends Activity implements OnClickListener{
 				else {
 					try{
 						String errorMesg=response.getString("errorMesg");
-						Toast.makeText(MainActivity.this, "获取车辆信息失败:"+errorMesg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+						Log.i("TAG", errorMesg);
+						if("未登录，请先登录".equals(errorMesg)){
+							Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+							startActivity(intent);
+						}
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(MainActivity.this, "获取车辆信息失败", Toast.LENGTH_SHORT).show();
