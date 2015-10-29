@@ -50,7 +50,7 @@ public class DispatchInfoFragment extends Fragment {
 				Bundle savedInstanceState) {
 			System.out.println("初始化fragment_dispatchinfo一次");
 			ctx=this.getActivity();
-			currentView = inflater.inflate(R.layout.fragment_dispachinfo,container,false);
+			currentView = inflater.inflate(R.layout.fragment_dispatchinfo,container,false);
 			
 			tv_dispatchPerson=(TextView) currentView.findViewById(R.id.txt_dispatchPerson);
 			tv_dispatchCar=(TextView) currentView.findViewById(R.id.txt_dispatchCar);
