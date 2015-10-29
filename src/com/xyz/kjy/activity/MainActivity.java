@@ -163,7 +163,6 @@ public class MainActivity extends Activity implements OnClickListener{
 						MainActivity.this.overridePendingTransition(R.anim.push_left_in,
 								R.anim.push_left_out);
 					}else{
-//						updateCustomerDataAndGoto(storeName);
 						Intent intent = new Intent(MainActivity.this, CustomerInfoActivity.class);
 						intent.putExtra(MyDatabaseHelper.STORENAME, storeName);
 						intent.putExtra(MyDatabaseHelper.STOREOWNERNAME,"暂无信息");
@@ -176,6 +175,8 @@ public class MainActivity extends Activity implements OnClickListener{
 						MainActivity.this.overridePendingTransition(R.anim.push_left_in,
 								R.anim.push_left_out);
 					}
+				}else if(resultCode==RESULT_CANCELED){
+					Log.i("TAG","扫描二维码取消");
 				}else{
 					Log.i("TAG","扫描二维码失败");
 					Toast.makeText(MainActivity.this, "扫描商家信息失败", Toast.LENGTH_SHORT).show();
