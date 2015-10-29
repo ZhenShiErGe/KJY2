@@ -122,7 +122,7 @@ public class CustomersFragment extends Fragment implements OnItemClickListener {
 			intent.putExtra(MyDatabaseHelper.PHONE, customer.getPhone());			
 			intent.putExtra(MyDatabaseHelper.PRODUCTIONNAME, customer.getProductionName());
 			intent.putExtra(MyDatabaseHelper.ADDRESS,customer.getAddress());
-			intent.putExtra(MyDatabaseHelper.UNITPRICE, Integer.parseInt(customer.getUnitPrice().trim())/100.0+"");
+			intent.putExtra(MyDatabaseHelper.UNITPRICE, Integer.parseInt(customer.getUnitPrice().trim())/100.0+"元");
 			getActivity().startActivity(intent);
 			getActivity().overridePendingTransition(R.anim.push_left_in,
 					R.anim.push_left_out);
