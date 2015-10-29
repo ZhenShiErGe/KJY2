@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="18dp"
                 android:gravity="center_horizontal"
                 android:text="@string/onDispatching"
                 android:textColor="#353535"
@@ -57,6 +57,12 @@
                 android:text="@string/dispatchPerson"
                 android:textColor="#353535"
                 android:textSize="16sp" />
+            
+               <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#dbdbdb" />
         </RelativeLayout>
         
 		<RelativeLayout
@@ -84,7 +90,11 @@
                 android:text="@string/dispatchCar"
                 android:textColor="#353535"
                 android:textSize="16sp" />
-            
+               <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#dbdbdb" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -111,7 +121,11 @@
                 android:text="@string/dispatchPerson"
                 android:textColor="#353535"
                 android:textSize="16sp" />
-            
+               <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#dbdbdb" />
         </RelativeLayout>
         <Button
             android:id="@+id/btn_dispatchOver"
