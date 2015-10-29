@@ -27,7 +27,6 @@
                 android:background="@drawable/setting_item_selector"
                 android:paddingLeft="90dp"
                 android:singleLine="true"
-                android:maxLength="11"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
 
@@ -61,7 +60,6 @@
                 android:background="@drawable/setting_item_selector"
                 android:paddingLeft="90dp"
                 android:singleLine="true"
-                android:maxLength="11"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
 
@@ -89,7 +87,6 @@
                 android:background="@drawable/setting_item_selector"
                 android:paddingLeft="90dp"
                 android:singleLine="true"
-                android:maxLength="11"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
 
@@ -118,7 +115,6 @@
                 android:background="@drawable/setting_item_selector"
                 android:paddingLeft="90dp"
                 android:singleLine="true"
-                android:maxLength="11"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
 
@@ -147,7 +143,6 @@
                 android:background="@drawable/setting_item_selector"
                 android:paddingLeft="90dp"
                 android:singleLine="true"
-                android:maxLength="11"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
 
