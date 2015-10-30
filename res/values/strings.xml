@@ -36,6 +36,7 @@
     <string name="dispatchOver">结束配送</string>
     <string name="dispatchStart">开始配送</string>
     
+    <string name="putoffinto">卸货信息</string>
     <string name="putoffcustomer">卸货商家</string>
     <string name="putoffNum">卸货数量</string>
     <string name="putonNum">返货数量</string>

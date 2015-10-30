@@ -126,6 +126,8 @@ public class CustomerInfoActivity extends FragmentActivity {
 									Intent intent=new Intent(CustomerInfoActivity.this,PutOffActivity.class);
 									intent.putExtra(MyDatabaseHelper.STORENAME,storeName);
 									startActivity(intent);
+									CustomerInfoActivity.this.overridePendingTransition(R.anim.push_left_in,
+											R.anim.push_left_out);
 								}else{
 									Toast.makeText(CustomerInfoActivity.this, "请先开始一次配送", Toast.LENGTH_SHORT).show();
 								}

@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class PutOffActivity extends Activity {
 	private EditText et_putonNum;
 	private RadioGroup rg_settletype;
 	private Button btn_sendMess;
+	private ImageView backToMain;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,18 @@ public class PutOffActivity extends Activity {
 		et_putonNum=(EditText) findViewById(R.id.et_putonnum);
 		rg_settletype=(RadioGroup) findViewById(R.id.rg_settletype);
 		btn_sendMess=(Button) findViewById(R.id.btnsendmess);
-		
+		backToMain= (ImageView) findViewById(R.id.putoff_back_main);
 		
 		tv_storeName.setText(storeName);
 		
+        backToMain.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				PutOffActivity.this.finish();
+				PutOffActivity.this.overridePendingTransition(R.anim.push_right_in,
+						R.anim.push_right_out);
+			}
+		});
 		btn_sendMess.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -115,6 +125,8 @@ public class PutOffActivity extends Activity {
 						intent.putExtra("payNum", Integer.parseInt(payNum));
 						intent.putExtra("storeName", storeName);
 						startActivity(intent);
+						PutOffActivity.this.overridePendingTransition(R.anim.push_left_in,
+								R.anim.push_left_out);
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 					}
@@ -126,6 +138,8 @@ public class PutOffActivity extends Activity {
 							MySharedPreferences.putBoolean(PutOffActivity.this, Constants.UserIsLogin, false);
 							Intent intent=new Intent(PutOffActivity.this,LoginActivity.class);
 							startActivity(intent);
+							PutOffActivity.this.overridePendingTransition(R.anim.push_left_in,
+									R.anim.push_left_out);
 						}else{
 							Toast.makeText(PutOffActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
 						}

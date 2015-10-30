@@ -209,7 +209,7 @@ public final class R {
     public static final class id {
         public static final int about_version_code=0x7f07000e;
         public static final int aboutus_back_main=0x7f070010;
-        public static final int action_settings=0x7f070052;
+        public static final int action_settings=0x7f070053;
         public static final int add_dispatching=0x7f070049;
         /**  Messages IDs 
  Messages IDs 
@@ -254,6 +254,7 @@ public final class R {
         public static final int main_bottom=0x7f07003f;
         public static final int money=0x7f070025;
         public static final int preview_view=0x7f07002c;
+        public static final int putoff_back_main=0x7f070051;
         public static final int quit=0x7f070007;
         public static final int rb_debt=0x7f070027;
         public static final int rb_money=0x7f070026;
@@ -268,7 +269,7 @@ public final class R {
         public static final int search_book_contents_succeeded=0x7f07000b;
         public static final int sideBar=0x7f070035;
         public static final int split=0x7f07000f;
-        public static final int startdispatch_back_main=0x7f070051;
+        public static final int startdispatch_back_main=0x7f070052;
         public static final int tv_common_above_head=0x7f07004a;
         public static final int tv_contact_list=0x7f070045;
         public static final int tv_password=0x7f07001c;
@@ -317,7 +318,8 @@ public final class R {
         public static final int list_position=0x7f030013;
         public static final int login_title=0x7f030014;
         public static final int main=0x7f030015;
-        public static final int startdispatch_title=0x7f030016;
+        public static final int putoff_title=0x7f030016;
+        public static final int startdispatch_title=0x7f030017;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -334,7 +336,7 @@ public final class R {
         public static final int cancel=0x7f080003;
         public static final int customerInfo=0x7f080012;
         public static final int customers=0x7f080008;
-        public static final int debt=0x7f080027;
+        public static final int debt=0x7f080028;
         public static final int dispatchCar=0x7f08001e;
         public static final int dispatchInfo=0x7f08001b;
         public static final int dispatchOver=0x7f080020;
@@ -346,20 +348,21 @@ public final class R {
         public static final int hello_world=0x7f080005;
         public static final int logout=0x7f08000f;
         public static final int me=0x7f080009;
-        public static final int money=0x7f080026;
+        public static final int money=0x7f080027;
         public static final int onDispatching=0x7f08001c;
         public static final int password=0x7f080010;
-        public static final int payok=0x7f080029;
+        public static final int payok=0x7f08002a;
         public static final int printerset=0x7f08000d;
         public static final int production=0x7f080016;
         public static final int putoff=0x7f08001a;
-        public static final int putoffNum=0x7f080023;
-        public static final int putoffcustomer=0x7f080022;
-        public static final int putonNum=0x7f080024;
+        public static final int putoffNum=0x7f080024;
+        public static final int putoffcustomer=0x7f080023;
+        public static final int putoffinto=0x7f080022;
+        public static final int putonNum=0x7f080025;
         public static final int scanBarCode=0x7f080002;
         public static final int scan_text=0x7f080004;
-        public static final int sendMess=0x7f080028;
-        public static final int settletype=0x7f080025;
+        public static final int sendMess=0x7f080029;
+        public static final int settletype=0x7f080026;
         public static final int storeAddress=0x7f080018;
         public static final int storeBoss=0x7f080015;
         public static final int storeId=0x7f080013;
