@@ -39,10 +39,10 @@ public class PayActivity extends Activity {
 		int num=this.getIntent().getIntExtra("payNum",0);
 		String storeName=this.getIntent().getStringExtra("storeName");
 		if(type==1){
-			payHint.setText("请向商家  "+storeName+" 收取  "+(num/100.0)+"元   现金");
+			payHint.setText("请向商家"+storeName+"收取"+(num/100.0)+"元现金");
 		}
 		else if(type==2){
-			payHint.setText("请向商家  "+storeName+" 收取  "+(num/100.0)+"元  签单");
+			payHint.setText("请向商家"+storeName+"收取"+(num/100.0)+"元签单");
 		}
 		
 		payok.setOnClickListener(new View.OnClickListener() {
