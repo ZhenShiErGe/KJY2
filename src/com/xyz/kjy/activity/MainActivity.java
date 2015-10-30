@@ -125,15 +125,11 @@ public class MainActivity extends Activity implements OnClickListener{
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(MainActivity.this, "正在加载", Toast.LENGTH_SHORT).show();
-//				final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
-//				progressDialog.setMessage(Constants.BeingLoad);
-//				progressDialog.show();
 				Intent scanIntent=new Intent(MainActivity.this,CaptureActivity.class);
 				scanIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivityForResult(scanIntent,SCAN_CODE);
 				MainActivity.this.overridePendingTransition(R.anim.push_left_in,
 						R.anim.push_left_out);
-//				progressDialog.dismiss();
 			}
 		});
 	}

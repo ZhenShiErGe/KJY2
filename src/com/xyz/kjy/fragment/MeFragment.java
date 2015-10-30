@@ -20,9 +20,12 @@ import org.json.JSONObject;
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xyz.kjy.activity.AboutusActivity;
 import com.xyz.kjy.activity.CustomerInfoActivity;
 import com.xyz.kjy.activity.LoginActivity;
+import com.xyz.kjy.activity.MainActivity;
 import com.xyz.kjy.activity.PutOffActivity;
+import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.activity.SystemApplication;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
@@ -113,7 +116,9 @@ public class MeFragment extends Fragment{
 		tv_aboutus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				
+				Intent intent=new Intent(ctx,AboutusActivity.class);
+				startActivity(intent);
+				ctx.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
 			}
 		});
 		btn_logout.setOnClickListener(new View.OnClickListener() {

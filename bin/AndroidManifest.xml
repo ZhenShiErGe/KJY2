@@ -54,6 +54,7 @@
         <activity android:name="com.xyz.kjy.activity.StartDispatchActivity"/>
         <activity android:name="com.xyz.kjy.activity.PutOffActivity"/>
         <activity android:name="com.xyz.kjy.activity.PayActivity"/>
+        <activity android:name="com.xyz.kjy.activity.AboutusActivity"/>
     </application>
 
 </manifest>
