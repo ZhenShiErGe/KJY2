@@ -38,8 +38,8 @@
     
     <string name="putoffinto">卸货信息</string>
     <string name="putoffcustomer">卸货商家</string>
-    <string name="putoffNum">卸货数量</string>
-    <string name="putonNum">返货数量</string>
+    <string name="putoffNum">卸货量(箱)</string>
+    <string name="putonNum">返货量(箱)</string>
     <string name="settletype">结算方式</string>
     <string name="money">现金</string>
     <string name="debt">欠款</string>

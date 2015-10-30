@@ -56,14 +56,16 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
 					android:text="@string/putoffNum" 
+					android:singleLine="true"
                 android:textColor="#353535"
                 android:textSize="16sp" />
-            
+            <!-- 
                <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:layout_alignParentBottom="true"
                 android:background="#dbdbdb" />
+                 -->
         </RelativeLayout>
         
         
@@ -91,13 +93,16 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
 				android:text="@string/putonNum" 
+				android:singleLine="true"
                 android:textColor="#353535"
                 android:textSize="16sp" />
+              <!-- 
                <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:layout_alignParentBottom="true"
                 android:background="#dbdbdb" />
+                -->
         </RelativeLayout>
         
 		
