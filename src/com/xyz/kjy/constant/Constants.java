@@ -11,12 +11,15 @@ public class Constants {
 	public static final String LogoutURI="http://financialsys.coding.io/doLogout.json";
 	public static final String SendMessURI="http://financialsys.coding.io/dispatchRecord/doAdd.json";
 	public static final String AllCarURI="http://financialsys.coding.io/car/getAll.json";
+	
 //	public static final String Cookie="cookie";
 	public static final String UserIsLogin="isLogin";
 	public static final String UserName="userName";
+	
+	public static final String DispatchIsDo="isDispatch"; 
 //	public static final String UserPass="password";
-	public static final String ResponseStatus="responseStatus";
-	public static final String ResponseData="responseData";
+//	public static final String ResponseStatus="responseStatus";
+//	public static final String ResponseData="responseData";
 	public static final String BeingLogin="正在登录";
 	public static final String BeingLogout="正在退出";
 	public static final String BeingLoad="正在加载";
