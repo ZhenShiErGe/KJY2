@@ -32,7 +32,7 @@
     <string name="onDispatching">正在配送中</string>
     <string name="dispatchPerson">配送员</string>
     <string name="dispatchCar">车牌号</string>
-    <string name="dispatchStartTime">开始时间</string>
+    <string name="dispatchStartTime">开始于</string>
     <string name="dispatchOver">结束配送</string>
     <string name="dispatchStart">开始配送</string>
     

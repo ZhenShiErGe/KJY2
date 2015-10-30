@@ -42,9 +42,6 @@ public class DispatchingsFragment extends Fragment {
 			ctx = this.getActivity();
 			layout = ctx.getLayoutInflater().inflate(R.layout.fragment_dispaching,
 					null);
-//			ctx.getFragmentManager().beginTransaction()
-//			.add(R.id.fragment_dispatch_container,dispatchInfoFragment)
-//			.hide(dispatchInfoFragment).commit();
 			initDispatchInfoFromNet();
 		}else {
 			ViewGroup parent = (ViewGroup) layout.getParent();
@@ -60,58 +57,70 @@ public class DispatchingsFragment extends Fragment {
  * 如果有正在配送记录，显示之
  */
 	private void initDispatchInfoFromNet() {
-		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
-		if(HttpClientCenter.getCookie().size()!=0)
-			client.setCookieStore(HttpClientCenter.getCookieStore());
-		client.get(Constants.DispatchInfoURI, new JsonHttpResponseHandler(){
-			@Override
-			public void onSuccess(int statusCode, Header[] headers,
-					JSONObject response) {
-				boolean result=false;
-				try{
-					result=response.getBoolean("isSuccess");
-				}catch(JSONException e){
-					Log.e("TAG",e.getMessage());
-					Toast.makeText(ctx, "获取配送信息失败", Toast.LENGTH_SHORT).show();
-				}
-				if(result){
+		boolean flag=MySharedPreferences.getBoolean(ctx, Constants.DispatchIsDoing, false);
+		if(flag){
+			DispatchInfo dispatchInfo=new DispatchInfo(MySharedPreferences.getString(ctx, Constants.DispatchCar, ""),
+					MySharedPreferences.getString(ctx, Constants.DispatchStarttime, ""));
+			initDispatchFragment(dispatchInfo);
+		}
+		else{
+			AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+			if(HttpClientCenter.getCookie().size()!=0)
+				client.setCookieStore(HttpClientCenter.getCookieStore());
+			client.get(Constants.DispatchInfoURI, new JsonHttpResponseHandler(){
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						JSONObject response) {
+					boolean result=false;
 					try{
-						String jsonString=response.getString("content");
-						JSONObject json=new JSONObject(jsonString);
-						String jsonString1=json.getString("dispatchInfo");
-						if(!"".equals(jsonString1)){
-							DispatchInfo dispatchInfo=com.alibaba.fastjson.JSONObject.parseObject(jsonString1, DispatchInfo.class);
-							initDispatchFragment(dispatchInfo);
-						}
+						result=response.getBoolean("isSuccess");
 					}catch(JSONException e){
 						Log.e("TAG",e.getMessage());
 						Toast.makeText(ctx, "获取配送信息失败", Toast.LENGTH_SHORT).show();
 					}
-				}
-				else {
-					try{
-						String errorMesg=response.getString("errorMesg");
-						if("未登陆，请先登陆".equals(errorMesg)){
-							MySharedPreferences.putBoolean(ctx, Constants.UserIsLogin, false);
-							Intent intent=new Intent(ctx,LoginActivity.class);
-							startActivity(intent);
-						}else{
-							Toast.makeText(ctx, errorMesg, Toast.LENGTH_SHORT).show();
+					if(result){
+						try{
+							String jsonString=response.getString("content");
+							JSONObject json=new JSONObject(jsonString);
+							String jsonString1=json.getString("dispatchInfo");
+							if(!"".equals(jsonString1)){
+								DispatchInfo dispatchInfo=com.alibaba.fastjson.JSONObject.parseObject(jsonString1, DispatchInfo.class);
+								initDispatchFragment(dispatchInfo);
+								//存储到本地
+								MySharedPreferences.putBoolean(ctx, Constants.DispatchIsDoing, true);
+								MySharedPreferences.putString(ctx, Constants.DispatchCar, dispatchInfo.getCarNum());
+								MySharedPreferences.putString(ctx, Constants.DispatchStarttime, dispatchInfo.getStartTime());
+							}
+						}catch(JSONException e){
+							Log.e("TAG",e.getMessage());
+							Toast.makeText(ctx, "获取配送信息失败", Toast.LENGTH_SHORT).show();
 						}
-					}catch(JSONException e){
-						Log.e("TAG",e.getMessage());
-						Toast.makeText(ctx, "获取配送信息失败", Toast.LENGTH_SHORT).show();
+					}
+					else {
+						try{
+							String errorMesg=response.getString("errorMesg");
+							if("未登陆，请先登陆".equals(errorMesg)){
+								MySharedPreferences.putBoolean(ctx, Constants.UserIsLogin, false);
+								Intent intent=new Intent(ctx,LoginActivity.class);
+								startActivity(intent);
+							}else{
+								Toast.makeText(ctx, errorMesg, Toast.LENGTH_SHORT).show();
+							}
+						}catch(JSONException e){
+							Log.e("TAG",e.getMessage());
+							Toast.makeText(ctx, "获取配送信息失败", Toast.LENGTH_SHORT).show();
+						}
 					}
 				}
-			}
-			
-			@Override
-			public void onFailure(int statusCode, Header[] headers,
-					Throwable throwable, JSONObject errorResponse) {
-//				Log.e("TAG",throwable.getMessage());
-				Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			}
-		});
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						Throwable throwable, JSONObject errorResponse) {
+//					Log.e("TAG",throwable.getMessage());
+					Toast.makeText(ctx, "请检查网络连接", Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
 	}
 	
 	private void initDispatchFragment(DispatchInfo dispatchInfo) {

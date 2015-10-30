@@ -117,7 +117,7 @@
                 android:layout_alignLeft="@id/txt_dispatchStarttime"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:text="@string/dispatchPerson"
+                android:text="@string/dispatchStartTime"
                 android:textColor="#353535"
                 android:textSize="16sp" />
                <View

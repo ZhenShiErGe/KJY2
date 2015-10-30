@@ -110,7 +110,7 @@ public class DispatchInfoFragment extends Fragment {
 					Toast.makeText(ctx, "结束配送失败", Toast.LENGTH_SHORT).show();
 				}
 				if(result){
-					
+					MySharedPreferences.putBoolean(ctx, Constants.DispatchIsDoing,false);
 					Intent intent=new Intent(ctx,MainActivity.class);
 					startActivity(intent);
 					progressDialog.dismiss();

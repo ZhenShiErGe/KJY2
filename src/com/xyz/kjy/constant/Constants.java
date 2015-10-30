@@ -16,7 +16,9 @@ public class Constants {
 	public static final String UserIsLogin="isLogin";
 	public static final String UserName="userName";
 	
-	public static final String DispatchIsDo="isDispatch"; 
+	public static final String DispatchIsDoing="isDispatching"; 
+	public static final String DispatchCar="dispatchCar";
+	public static final String DispatchStarttime="dispatchStarttime";
 //	public static final String UserPass="password";
 //	public static final String ResponseStatus="responseStatus";
 //	public static final String ResponseData="responseData";

@@ -143,6 +143,7 @@ public class MeFragment extends Fragment{
 						}
 						if(result){
 							MySharedPreferences.putBoolean(ctx, Constants.UserIsLogin,false);
+							MySharedPreferences.putBoolean(ctx, Constants.DispatchIsDoing, false);
 			     			SystemApplication.getInstance().exit();
 			     			progressDialog.dismiss();
 						}
