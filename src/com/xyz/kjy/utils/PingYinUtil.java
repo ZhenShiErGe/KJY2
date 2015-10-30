@@ -15,30 +15,30 @@ public class PingYinUtil {
 	 * @param inputString
 	 * @return
 	 */
-	public static String getPingYin(String inputString) {
-		HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
-		format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
-		format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-		format.setVCharType(HanyuPinyinVCharType.WITH_V);
-
-		char[] input = inputString.trim().toCharArray();
-		String output = "";
-
-		try {
-			for (int i = 0; i < input.length; i++) {
-				if (java.lang.Character.toString(input[i]).matches(
-						"[\\u4E00-\\u9FA5]+")) {
-					String[] temp = PinyinHelper.toHanyuPinyinStringArray(
-							input[i], format);
-					output += temp[0];
-				} else
-					output += java.lang.Character.toString(input[i]);
-			}
-		} catch (BadHanyuPinyinOutputFormatCombination e) {
-			e.printStackTrace();
-		}
-		return output;
-	}
+//	public static String getPingYin(String inputString) {
+//		HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
+//		format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+//		format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+//		format.setVCharType(HanyuPinyinVCharType.WITH_V);
+//
+//		char[] input = inputString.trim().toCharArray();
+//		String output = "";
+//
+//		try {
+//			for (int i = 0; i < input.length; i++) {
+//				if (java.lang.Character.toString(input[i]).matches(
+//						"[\\u4E00-\\u9FA5]+")) {
+//					String[] temp = PinyinHelper.toHanyuPinyinStringArray(
+//							input[i], format);
+//					output += temp[0];
+//				} else
+//					output += java.lang.Character.toString(input[i]);
+//			}
+//		} catch (BadHanyuPinyinOutputFormatCombination e) {
+//			e.printStackTrace();
+//		}
+//		return output;
+//	}
 
 	/**
 	 * 汉字转换位汉语拼音首字母，英文字符不变
@@ -51,7 +51,8 @@ public class PingYinUtil {
 		String pinyinName = "";
 		char[] nameChar = chines.toCharArray();
 		HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
-		defaultFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+//		defaultFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+		defaultFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
 		defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
 		for (int i = 0; i < nameChar.length; i++) {
 			if (nameChar[i] > 128) {

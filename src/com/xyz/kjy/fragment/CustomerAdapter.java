@@ -71,7 +71,7 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		
 		if (position == 0) {
 			tvCatalog.setVisibility(View.VISIBLE);
-			tvCatalog.setText(catalog);
+			tvCatalog.setText(catalog.toUpperCase());
 		} else {
 			Customer nextCustomer = customers.get(position - 1);
 			String lastCatalog = PingYinUtil.converterToFirstSpell(
@@ -80,7 +80,8 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 				tvCatalog.setVisibility(View.GONE);
 			} else {
 				tvCatalog.setVisibility(View.VISIBLE);
-				tvCatalog.setText(catalog);
+//				tvCatalog.setText(catalog);
+				tvCatalog.setText(catalog.toUpperCase());
 			}
 		}
 
