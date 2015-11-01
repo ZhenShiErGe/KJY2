@@ -27,12 +27,16 @@ import com.xyz.kjy.utils.MySharedPreferences;
 import com.zxing.activity.CaptureActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -42,6 +46,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener{
 
 	private final static int SCAN_CODE = 1;
+	private static final int APP_EXIT = 0;
 	/**
 	 * 主界面的tab相关
 	 */
@@ -321,6 +326,41 @@ public class MainActivity extends Activity implements OnClickListener{
 			}
 		});
 	}
+	/*************重写返回键----start**********/
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event) {  
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {  
+            showDialog(APP_EXIT);  
+            return true;  
+        } else  
+            return super.onKeyDown(keyCode, event);  
+    }  
+	 @Override  
+	    protected Dialog onCreateDialog(int id) {  
+	        if (id == APP_EXIT) {  
+	            return new AlertDialog.Builder(MainActivity.this)  
+	                    .setMessage("是否退出程序?")  
+	                    .setPositiveButton("确定",  
+	                            new DialogInterface.OnClickListener() {  
+	                                public void onClick(DialogInterface dialog,  
+	                                        int which) {  
+	        			     			SystemApplication.getInstance().exit();
+	        			     			dialog.dismiss();  
+	                                }  
+	                            })  
+	                    .setNegativeButton("取消",  
+	                            new DialogInterface.OnClickListener() {  
+	                                public void onClick(DialogInterface dialog,  
+	                                        int which) {  
+	                                    dialog.dismiss();  
+	                                }  
+	                            }).create();  
+	  
+	        }  
+	        return null;  
+	  
+	    }  
+	 /*************重写返回键---end**********/
 	private void startDispatchActivity() {
 		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
 		if(HttpClientCenter.getCookie().size()!=0)
