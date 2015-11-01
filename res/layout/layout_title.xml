@@ -6,35 +6,41 @@
 
 
     <!-- app左侧搜索栏目框 -->
-
-    <ImageView
+    <LinearLayout
         android:id="@+id/add_dispatching"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/icon_add" />
+        android:layout_width="wrap_content"
+         android:layout_alignParentLeft="true"
+     android:layout_alignParentTop="true" >
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="15dp"
+	        android:src="@drawable/icon_add" />
+    </LinearLayout>
+    
     
     <!-- app中间地址搜索栏目框 -->
-    
-  
        <TextView
-         android:id="@+id/tv_common_above_head"
+           android:id="@+id/appname"
         style="@style/txt_titleStyle1"
         android:text="@string/app_name"
         android:layout_centerInParent="true"  />
-   
 	
+       
 	<!-- app右侧侧搜索栏目框 -->
 
-    <ImageView
-        android:id="@+id/scan_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/icon_menu_sao" />
-    
+	 <LinearLayout
+	         android:id="@+id/scan_customer"
+	     android:layout_width="wrap_content"
+	     android:layout_height="match_parent"
+	     android:layout_alignParentRight="true"
+	     android:layout_alignParentTop="true" >
+	     <ImageView
+	         android:layout_width="wrap_content"
+	         android:layout_height="match_parent"
+	         android:layout_marginRight="15dp"
+	         android:src="@drawable/icon_menu_sao" />
+	 </LinearLayout>
+ 
 </RelativeLayout>

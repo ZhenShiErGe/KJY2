@@ -22,7 +22,7 @@ public final class R {
         public static final int Calendar_DayBgColor=0x7f060077;
         public static final int Calendar_WeekBgColor=0x7f060075;
         public static final int Calendar_WeekFontColor=0x7f060076;
-        public static final int bar_color=0x7f06001e;
+        public static final int bar_color=0x7f06001b;
         public static final int bg_color=0x7f060000;
         public static final int bgcolor=0x7f060073;
         public static final int black=0x7f060026;
@@ -136,7 +136,7 @@ public final class R {
         /**  透明 
          */
         public static final int transparent=0x7f060015;
-        public static final int transparent2=0x7f06001c;
+        public static final int transparent2=0x7f06001d;
         public static final int txtcolor=0x7f060074;
         public static final int unPresentMonth_FontColor=0x7f060079;
         public static final int viewfinder_frame=0x7f060016;
@@ -145,14 +145,14 @@ public final class R {
         public static final int weekname_color=0x7f060068;
         /**  白色 
          */
-        public static final int white=0x7f06001b;
+        public static final int white=0x7f06001c;
         public static final int white_blue=0x7f06002f;
         public static final int white_blue_selected=0x7f060049;
         public static final int white_gray=0x7f060030;
         public static final int window_bg=0x7f060052;
         /** 窗体颜色 
          */
-        public static final int windows_color=0x7f06001d;
+        public static final int windows_color=0x7f06001e;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -211,6 +211,7 @@ public final class R {
         public static final int aboutus_back_main=0x7f070010;
         public static final int action_settings=0x7f070053;
         public static final int add_dispatching=0x7f070049;
+        public static final int appname=0x7f07004a;
         /**  Messages IDs 
  Messages IDs 
          */
@@ -270,7 +271,6 @@ public final class R {
         public static final int sideBar=0x7f070035;
         public static final int split=0x7f07000f;
         public static final int startdispatch_back_main=0x7f070052;
-        public static final int tv_common_above_head=0x7f07004a;
         public static final int tv_contact_list=0x7f070045;
         public static final int tv_password=0x7f07001c;
         public static final int tv_profile=0x7f070048;

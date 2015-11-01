@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener{
@@ -55,7 +56,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	/**
 	 * 扫描二维码
 	 */
-	private ImageView btnScan;
+	private LinearLayout btnScan;
 	/**
 	 * 商家数据更新试用的数据库 
 	 */
@@ -120,7 +121,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	 * 定义二维码扫描项
 	 */
 	private void initScan(){
-		btnScan=(ImageView) findViewById(R.id.scan_customer);
+		btnScan=(LinearLayout) findViewById(R.id.scan_customer);
 		btnScan.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

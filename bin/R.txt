@@ -7,7 +7,7 @@ int anim push_right_out 0x7f040005
 int color Calendar_DayBgColor 0x7f060077
 int color Calendar_WeekBgColor 0x7f060075
 int color Calendar_WeekFontColor 0x7f060076
-int color bar_color 0x7f06001e
+int color bar_color 0x7f06001b
 int color bg_color 0x7f060000
 int color bgcolor 0x7f060073
 int color black 0x7f060026
@@ -119,19 +119,19 @@ int color title_white 0x7f060024
 int color today_background_color 0x7f06006f
 int color today_color 0x7f060070
 int color transparent 0x7f060015
-int color transparent2 0x7f06001c
+int color transparent2 0x7f06001d
 int color txtcolor 0x7f060074
 int color unPresentMonth_FontColor 0x7f060079
 int color viewfinder_frame 0x7f060016
 int color viewfinder_laser 0x7f060017
 int color viewfinder_mask 0x7f060018
 int color weekname_color 0x7f060068
-int color white 0x7f06001b
+int color white 0x7f06001c
 int color white_blue 0x7f06002f
 int color white_blue_selected 0x7f060049
 int color white_gray 0x7f060030
 int color window_bg 0x7f060052
-int color windows_color 0x7f06001d
+int color windows_color 0x7f06001e
 int dimen activity_horizontal_margin 0x7f090000
 int dimen activity_vertical_margin 0x7f090001
 int drawable abc_ic_search 0x7f020000
@@ -177,6 +177,7 @@ int id about_version_code 0x7f07000e
 int id aboutus_back_main 0x7f070010
 int id action_settings 0x7f070053
 int id add_dispatching 0x7f070049
+int id appname 0x7f07004a
 int id auto_focus 0x7f070000
 int id btn_add_qrcode 0x7f07004f
 int id btn_callstore 0x7f070018
@@ -233,7 +234,6 @@ int id search_book_contents_succeeded 0x7f07000b
 int id sideBar 0x7f070035
 int id split 0x7f07000f
 int id startdispatch_back_main 0x7f070052
-int id tv_common_above_head 0x7f07004a
 int id tv_contact_list 0x7f070045
 int id tv_password 0x7f07001c
 int id tv_profile 0x7f070048
