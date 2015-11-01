@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,8 @@ public class CustomerInfoActivity extends FragmentActivity {
 	private Button btnPutOff;
 	
 	private String storeName;
-	private ImageView backToMainActivity;
+//	private ImageView backToMainActivity;
+	private LinearLayout backToMainActivity;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class CustomerInfoActivity extends FragmentActivity {
 		tvAddress=(TextView) findViewById(R.id.txt_storeaddress);
 		btnPhone=(Button) findViewById(R.id.btn_callstore);
 		btnPutOff=(Button) findViewById(R.id.btn_putoff);
-		backToMainActivity=(ImageView) findViewById(R.id.customerinfo_back_main);
+		backToMainActivity= (LinearLayout) findViewById(R.id.customerinfo_back_main);
 		
 		storeName=intent.getStringExtra(MyDatabaseHelper.STORENAME);
 		

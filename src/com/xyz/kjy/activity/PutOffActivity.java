@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class PutOffActivity extends Activity {
 	private EditText et_putonNum;
 	private RadioGroup rg_settletype;
 	private Button btn_sendMess;
-	private ImageView backToMain;
+	private LinearLayout backToMain;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class PutOffActivity extends Activity {
 		et_putonNum=(EditText) findViewById(R.id.et_putonnum);
 		rg_settletype=(RadioGroup) findViewById(R.id.rg_settletype);
 		btn_sendMess=(Button) findViewById(R.id.btnsendmess);
-		backToMain= (ImageView) findViewById(R.id.putoff_back_main);
+		backToMain= (LinearLayout) findViewById(R.id.putoff_back_main);
 		
 		tv_storeName.setText(storeName);
 		

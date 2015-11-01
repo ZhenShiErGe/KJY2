@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,8 @@ public class StartDispatchActivity extends FragmentActivity {
 	private TextView tvDispatchPerson;
 	private Spinner tvDispatchCar;
 	private Button startDispatch;
-	private ImageView backToMainActivity;
+//	private ImageView backToMainActivity;
+	private LinearLayout backToMainActivity;
 	
 	private List<CharSequence> dataCarNum=null;
 	private ArrayAdapter<CharSequence> adapterCarNum=null;
@@ -51,7 +53,7 @@ public class StartDispatchActivity extends FragmentActivity {
 		tvDispatchPerson=(TextView) findViewById(R.id.txt_dispatchPerson);
 		
 		startDispatch=(Button) findViewById(R.id.btn_dispatchStart);
-		backToMainActivity=(ImageView) findViewById(R.id.startdispatch_back_main);
+		backToMainActivity=(LinearLayout) findViewById(R.id.startdispatch_back_main);
 		
 		//设置车辆下拉框有关信息
 		this.dataCarNum=new ArrayList<CharSequence>();

@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class AboutusActivity extends Activity {
-	private ImageView btnback;
+//	private ImageView btnback;
+	private LinearLayout btnback;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_aboutus);
@@ -18,7 +20,7 @@ public class AboutusActivity extends Activity {
 		//在所有activity中添加该行代码，用于需要时退出应用程序
 		SystemApplication.getInstance().addActivity(this);
 		
-		btnback= (ImageView) findViewById(R.id.aboutus_back_main);
+		btnback= (LinearLayout) findViewById(R.id.aboutus_back_main);
 		
 		btnback.setOnClickListener(new View.OnClickListener() {
 			@Override

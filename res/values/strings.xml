@@ -46,5 +46,6 @@
     <string name="sendMess">发送信息</string>
     <string name="payok">完成</string>
     
+    <string name="backto">返回</string>
 
 </resources>
