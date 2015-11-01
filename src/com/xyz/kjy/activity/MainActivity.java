@@ -101,7 +101,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	 * 定义左上部添加配送记录
 	 */
 	private void initAddDispitchBtn(){
-		ImageView btn_add_dispitch=(ImageView) findViewById(R.id.add_dispatching);
+		LinearLayout btn_add_dispitch= (LinearLayout) findViewById(R.id.add_dispatching);
 		btn_add_dispitch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
