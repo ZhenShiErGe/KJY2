@@ -25,8 +25,9 @@ public class AboutusActivity extends Activity {
 		btnback.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent =new Intent(AboutusActivity.this,MainActivity.class);
-				startActivity(intent);
+//				Intent intent =new Intent(AboutusActivity.this,MainActivity.class);
+//				startActivity(intent);
+				AboutusActivity.this.finish();
 				AboutusActivity.this.overridePendingTransition(R.anim.push_right_in,
 						R.anim.push_right_out);
 			}
