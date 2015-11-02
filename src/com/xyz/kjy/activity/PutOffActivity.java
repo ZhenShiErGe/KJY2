@@ -95,7 +95,7 @@ public class PutOffActivity extends Activity {
 		});
 	}
 
-	private void sendMessage(final String storeName,String outNum,String returnNum,final String settleType) {
+	private void sendMessage(final String storeName,final String outNum,String returnNum,final String settleType) {
 		RequestParams params=new RequestParams();
 		params.put("storeName", storeName);
 		params.put("productionOutNo",outNum);
@@ -125,6 +125,8 @@ public class PutOffActivity extends Activity {
 						intent.putExtra("payType", Integer.parseInt(settleType));
 						intent.putExtra("payNum", Integer.parseInt(payNum));
 						intent.putExtra("storeName", storeName);
+						intent.putExtra("putoffNum", outNum);//卸货数量
+						intent.putExtra("price",Integer.parseInt(payNum)/Integer.parseInt(outNum));//卸货单价
 						startActivity(intent);
 						PutOffActivity.this.overridePendingTransition(R.anim.push_left_in,
 								R.anim.push_left_out);

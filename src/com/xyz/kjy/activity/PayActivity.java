@@ -24,6 +24,7 @@ import android.widget.TextView;
 public class PayActivity extends Activity {
 	
 	private TextView payHint;
+	private TextView detail;
 	private Button payok;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +35,18 @@ public class PayActivity extends Activity {
 		
 		payHint=(TextView) findViewById(R.id.txt_payhint);
 		payok=(Button) findViewById(R.id.btnpayok);
-		
+		detail=(TextView) findViewById(R.id.txt_paydetail);
 		int type=this.getIntent().getIntExtra("payType",1);
 		int num=this.getIntent().getIntExtra("payNum",0);
 		String storeName=this.getIntent().getStringExtra("storeName");
 		if(type==1){
-			payHint.setText("请向商家"+storeName+"收取"+(num/100.0)+"元现金");
+			payHint.setText("请向商家"+storeName+"收取"+"元现金");
 		}
 		else if(type==2){
-			payHint.setText("请向商家"+storeName+"收取"+(num/100.0)+"元签单");
+			payHint.setText("请向商家"+storeName+"收取"+"元签单");
 		}
+		detail.setText(this.getIntent().getIntExtra("price",0)/100.00+"元/箱*"
+				+this.getIntent().getStringExtra("putoffNum")+"箱="+(num/100.0)+"元");
 		
 		payok.setOnClickListener(new View.OnClickListener() {
 			@Override
