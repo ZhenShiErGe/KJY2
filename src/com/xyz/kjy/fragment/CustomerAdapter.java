@@ -2,7 +2,6 @@ package com.xyz.kjy.fragment;
 
 import java.util.Collections;
 import java.util.List;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,13 +11,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-
 import com.example.kjy.R;
 import com.xyz.kjy.db.Customer;
 import com.xyz.kjy.utils.CustomerComparator;
-import com.xyz.kjy.utils.PingYinUtil;
-
-
+import com.xyz.kjy.utils.HanYuUtil;
 
 public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 	private Context mContext;
@@ -28,12 +24,8 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		this.mContext = mContext;
 		this.customers=customers;
 		// 排序(实现了中英文混排)
-	
-		if(customers!=null){
+		if(customers!=null)
 			Collections.sort(customers, new CustomerComparator());
-			for(int i=0;i<customers.size();i++)
-			Log.i("TAG",customers.get(i).getStoreName());
-		}
 	}
 
 	@Override
@@ -50,7 +42,6 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 	public long getItemId(int position) {
 		return customers==null?0:position;
 	}
-	
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -59,31 +50,24 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(mContext).inflate(
 					R.layout.contact_item, null);
-
 		}
 		ImageView ivAvatar = ViewHolder.get(convertView,
 				R.id.contactitem_avatar_iv);
 		
 		TextView tvCatalog = ViewHolder.get(convertView,
 				R.id.contactitem_catalog);//不同字母之间的隔栏
-		
 		TextView tvNick = ViewHolder.get(convertView, R.id.contactitem_nick);
-		
-		String catalog = PingYinUtil.converterToFirstSpell(customer.getStoreName())
-				.substring(0, 1);
-		
+		String catalog=HanYuUtil.getStringPinYin(customer.getStoreName()).substring(0, 1);
 		if (position == 0) {
 			tvCatalog.setVisibility(View.VISIBLE);
 			tvCatalog.setText(catalog.toUpperCase());
 		} else {
-			Customer nextCustomer = customers.get(position - 1);
-			String lastCatalog = PingYinUtil.converterToFirstSpell(
-					nextCustomer.getStoreName()).substring(0, 1);
+			Customer lastCustomer = customers.get(position - 1);
+			String lastCatalog=HanYuUtil.getStringPinYin(lastCustomer.getStoreName()).substring(0,1);
 			if (catalog.equalsIgnoreCase(lastCatalog)) {
 				tvCatalog.setVisibility(View.GONE);
 			} else {
 				tvCatalog.setVisibility(View.VISIBLE);
-//				tvCatalog.setText(catalog);
 				tvCatalog.setText(catalog.toUpperCase());
 			}
 		}
@@ -93,15 +77,15 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 		return convertView;
 	}
 
-	//返回某个部分的头一个元素所在位置
+	/**
+	 * 返回某个大写字母的头一个元素所在位置
+	 */
 	@Override
 	public int getPositionForSection(int section) {
 		for (int i = 0; i < customers.size(); i++) {
 			Customer customer =customers.get(i);
-			String l = PingYinUtil.converterToFirstSpell(customer.getStoreName())
-					.substring(0, 1);
-			char firstChar = l.toUpperCase().charAt(0);
-			if (firstChar == section) {
+			char firstChar=HanYuUtil.getStringPinYin(customer.getStoreName()).toUpperCase().charAt(0);
+			if (section==firstChar) {
 				return i;
 			}
 		}
