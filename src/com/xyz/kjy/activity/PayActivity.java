@@ -40,10 +40,10 @@ public class PayActivity extends Activity {
 		int num=this.getIntent().getIntExtra("payNum",0);
 		String storeName=this.getIntent().getStringExtra("storeName");
 		if(type==1){
-			payHint.setText("请向商家"+storeName+"收取"+"元现金");
+			payHint.setText("请向商家"+storeName+"收取"+"现金");
 		}
 		else if(type==2){
-			payHint.setText("请向商家"+storeName+"收取"+"元签单");
+			payHint.setText("请向商家"+storeName+"收取"+"欠单");
 		}
 		detail.setText(this.getIntent().getIntExtra("price",0)/100.00+"元/箱*"
 				+this.getIntent().getStringExtra("putoffNum")+"箱="+(num/100.0)+"元");
