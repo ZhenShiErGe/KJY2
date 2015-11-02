@@ -61,10 +61,11 @@ public class Customer  {
 	
 	@Override
 	public String toString() {
-		return "Customer ["+" storeName=" + storeName
-				+ ", storeOwnerName=" + storeOwnerName + ", phone=" + phone
-				+ ", address=" + address + ", productionName=" + productionName
-				+ ", unitPrice=" + unitPrice  + "]";
+//		return "Customer ["+" storeName=" + storeName
+//				+ ", storeOwnerName=" + storeOwnerName + ", phone=" + phone
+//				+ ", address=" + address + ", productionName=" + productionName
+//				+ ", unitPrice=" + unitPrice  + "]";
+		return storeName;
 	}
 	
 	

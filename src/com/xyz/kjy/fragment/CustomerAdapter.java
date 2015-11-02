@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 	
 		if(customers!=null){
 			Collections.sort(customers, new CustomerComparator());
+			for(int i=0;i<customers.size();i++)
+			Log.i("TAG",customers.get(i).getStoreName());
 		}
 	}
 
@@ -76,7 +79,7 @@ public class CustomerAdapter extends BaseAdapter implements SectionIndexer {
 			Customer nextCustomer = customers.get(position - 1);
 			String lastCatalog = PingYinUtil.converterToFirstSpell(
 					nextCustomer.getStoreName()).substring(0, 1);
-			if (catalog.equals(lastCatalog)) {
+			if (catalog.equalsIgnoreCase(lastCatalog)) {
 				tvCatalog.setVisibility(View.GONE);
 			} else {
 				tvCatalog.setVisibility(View.VISIBLE);
