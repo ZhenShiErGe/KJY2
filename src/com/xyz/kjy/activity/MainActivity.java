@@ -179,9 +179,13 @@ public class MainActivity extends Activity implements OnClickListener{
 					}
 				}else if(resultCode==RESULT_CANCELED){
 					Log.i("TAG","扫描二维码取消");
+					MainActivity.this.overridePendingTransition(R.anim.push_right_in,
+							R.anim.push_right_out);
 				}else{
 					Log.i("TAG","扫描二维码失败");
 					Toast.makeText(MainActivity.this, "扫描商家信息失败", Toast.LENGTH_SHORT).show();
+					MainActivity.this.overridePendingTransition(R.anim.push_right_in,
+							R.anim.push_right_out);
 				}
 				break;
 			default:
