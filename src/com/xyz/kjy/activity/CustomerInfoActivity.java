@@ -105,66 +105,75 @@ public class CustomerInfoActivity extends FragmentActivity {
 		btnPutOff.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
-				if(HttpClientCenter.getCookie().size()!=0)
-					client.setCookieStore(HttpClientCenter.getCookieStore());
-				client.get(Constants.DispatchInfoURI, new JsonHttpResponseHandler(){
-					@Override
-					public void onSuccess(int statusCode, Header[] headers,
-							JSONObject response) {
-						boolean result=false;
-						try{
-							result=response.getBoolean("isSuccess");
-						}catch(JSONException e){
-							Log.e("TAG",e.getMessage());
-							Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();
-						}
-						if(result){
-							try{
-								String jsonString=response.getString("content");
-								JSONObject json=new JSONObject(jsonString);
-								String jsonString1=json.getString("dispatchInfo");
-								if(!"".equals(jsonString1)){
-									Intent intent=new Intent(CustomerInfoActivity.this,PutOffActivity.class);
-									intent.putExtra(MyDatabaseHelper.STORENAME,storeName);
-									startActivity(intent);
-									CustomerInfoActivity.this.overridePendingTransition(R.anim.push_left_in,
-											R.anim.push_left_out);
-								}else{
-									Toast.makeText(CustomerInfoActivity.this, "请先开始一次配送", Toast.LENGTH_SHORT).show();
-								}
-							}catch(JSONException e){
-								Log.e("TAG",e.getMessage());
-								Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();
-							}
-						}
-						else {
-							try{
-								String errorMesg=response.getString("errorMesg");
-								if("未登陆，请先登陆".equals(errorMesg)){
-									MySharedPreferences.putBoolean(CustomerInfoActivity.this,Constants.UserIsLogin, false);
-									Intent intent=new Intent(CustomerInfoActivity.this,LoginActivity.class);
-									startActivity(intent);
-								}else{
-									Toast.makeText(CustomerInfoActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
-								}
-							}catch(JSONException e){
-								Log.e("TAG",e.getMessage());
-								Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();
-							}
-						}
-					}
+//				AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+//				if(HttpClientCenter.getCookie().size()!=0)
+//					client.setCookieStore(HttpClientCenter.getCookieStore());
+//				client.get(Constants.DispatchInfoURI, new JsonHttpResponseHandler(){
+//					@Override
+//					public void onSuccess(int statusCode, Header[] headers,
+//							JSONObject response) {
+//						boolean result=false;
+//						try{
+//							result=response.getBoolean("isSuccess");
+//						}catch(JSONException e){
+//							Log.e("TAG",e.getMessage());
+//							Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();
+//						}
+//						if(result){
+//							try{
+//								String jsonString=response.getString("content");
+//								JSONObject json=new JSONObject(jsonString);
+//								String jsonString1=json.getString("dispatchInfo");
+//								if(!"".equals(jsonString1)){
+//									Intent intent=new Intent(CustomerInfoActivity.this,PutOffActivity.class);
+//									intent.putExtra(MyDatabaseHelper.STORENAME,storeName);
+//									startActivity(intent);
+//									CustomerInfoActivity.this.overridePendingTransition(R.anim.push_left_in,
+//											R.anim.push_left_out);
+//								}else{
+//									Toast.makeText(CustomerInfoActivity.this, "请先开始一次配送", Toast.LENGTH_SHORT).show();
+//								}
+//							}catch(JSONException e){
+//								Log.e("TAG",e.getMessage());
+//								Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();
+//							}
+//						}
+//						else {
+//							try{
+//								String errorMesg=response.getString("errorMesg");
+//								if("未登陆，请先登陆".equals(errorMesg)){
+//									MySharedPreferences.putBoolean(CustomerInfoActivity.this,Constants.UserIsLogin, false);
+//									Intent intent=new Intent(CustomerInfoActivity.this,LoginActivity.class);
+//									startActivity(intent);
+//								}else{
+//									Toast.makeText(CustomerInfoActivity.this, errorMesg, Toast.LENGTH_SHORT).show();
+//								}
+//							}catch(JSONException e){
+//								Log.e("TAG",e.getMessage());
+//								Toast.makeText(CustomerInfoActivity.this, "获取配送信息失败", Toast.LENGTH_SHORT).show();
+//							}
+//						}
+//					}
+//					
+//					@Override
+//					public void onFailure(int statusCode, Header[] headers,
+//							Throwable throwable, JSONObject errorResponse) {
+//						Toast.makeText(CustomerInfoActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
+//					}
+//				});
+//				
+				boolean flag=MySharedPreferences.getBoolean(CustomerInfoActivity.this,Constants.DispatchIsDoing, false);
+				if(flag){
+					Intent intent=new Intent(CustomerInfoActivity.this,PutOffActivity.class);
+					intent.putExtra(MyDatabaseHelper.STORENAME,storeName);
+					startActivity(intent);
+					CustomerInfoActivity.this.overridePendingTransition(R.anim.push_left_in,
+							R.anim.push_left_out);
+				}else{
+					Toast.makeText(CustomerInfoActivity.this, "请先开始一次配送", Toast.LENGTH_SHORT).show();
+				}
 					
-					@Override
-					public void onFailure(int statusCode, Header[] headers,
-							Throwable throwable, JSONObject errorResponse) {
-						Toast.makeText(CustomerInfoActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
-					}
-				});
-				
 			}
 		});
-		
-		
 	}
 }
