@@ -89,17 +89,19 @@ public class MainActivity extends Activity implements OnClickListener{
 		btns[0]=(ImageView) findViewById(R.id.ib_weixin);
 		btns[1]= (ImageView) findViewById(R.id.ib_contact_list);
 		btns[2]=(ImageView) findViewById(R.id.ib_profile);
-		btns[0].setSelected(true);
+//		btns[0].setSelected(true);
+		btns[1].setSelected(true);
 		
 		findViewById(R.id.re_weixin).setOnClickListener(this);
 		findViewById(R.id.re_contact_list).setOnClickListener(this);
 		findViewById(R.id.re_profile).setOnClickListener(this);
 		
-		currentTabIndex=0;
+//		currentTabIndex=0;
+		currentTabIndex=1;
 		
 		getFragmentManager().beginTransaction().add(R.id.fragment_container, fragments[0])
 		.add(R.id.fragment_container, fragments[1]).add(R.id.fragment_container,fragments[2])
-		.hide(fragments[1]).hide(fragments[2]).show(fragments[0]).commit();
+		.hide(fragments[0]).hide(fragments[2]).show(fragments[1]).commit();
 		
 	}
 	/**
