@@ -20,7 +20,7 @@ public class SideBar extends View {
 	private SectionIndexer sectionIndexter = null;
 	private ListView list;
 	private TextView mDialogText;
-	private int m_nItemHeight = Utils.dipToPixel(getContext(), 15);
+//	private int m_nItemHeight = Utils.dipToPixel(getContext(), 15);
 
 	public SideBar(Context context) {
 		super(context);
@@ -35,7 +35,7 @@ public class SideBar extends View {
 	private void init() {
 		l = new char[] { '#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 				'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-				'W', 'X', 'Y', 'Z' };
+				'W', 'X', 'Y', 'Z','#' };
 	}
 
 	public SideBar(Context context, AttributeSet attrs, int defStyle) {
@@ -54,6 +54,7 @@ public class SideBar extends View {
 	public boolean onTouchEvent(MotionEvent event) {
 		super.onTouchEvent(event);
 		int i = (int) event.getY();
+		int m_nItemHeight = getHeight()/l.length;
 		int idx = i / m_nItemHeight;
 		if (idx >= l.length) {
 			idx = l.length - 1;
@@ -91,6 +92,7 @@ public class SideBar extends View {
 		paint.setFlags(Paint.ANTI_ALIAS_FLAG);
 		paint.setTextAlign(Paint.Align.CENTER);
 		float widthCenter = getMeasuredWidth() / 2;
+		 int m_nItemHeight = getHeight()/l.length;
 		for (int i = 0; i < l.length; i++) {
 			canvas.drawText(String.valueOf(l[i]), widthCenter, m_nItemHeight
 					+ (i * m_nItemHeight), paint);
