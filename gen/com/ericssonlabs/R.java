@@ -39,8 +39,8 @@ public final class R {
 	}
 	public static final class drawable {
 		public static final int ic_launcher = 0x7f02000b;
-		public static final int navbar = 0x7f020018;
-		public static final int qrcode_scan_line = 0x7f02001b;
+		public static final int navbar = 0x7f02001c;
+		public static final int qrcode_scan_line = 0x7f02001f;
 	}
 	public static final class id {
 		public static final int auto_focus = 0x7f070000;
