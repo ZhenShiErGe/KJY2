@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48.0dip"
+    android:background="@color/bar_color" >
+
+
+    <!-- app左侧搜索栏目框 -->
+
+	<LinearLayout
+        android:id="@+id/changepwd_back_main"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content">
+        
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="10dp"
+	        android:src="@drawable/icon_back" />
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="3dp"
+            android:text="@string/backto"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="16sp"
+	        />
+    </LinearLayout>
+    
+     <TextView
+        android:id="@+id/txt_title"
+        style="@style/txt_titleStyle1"
+        android:text="@string/updatepsw"
+        android:layout_centerInParent="true"  />
+
+    
+</RelativeLayout>

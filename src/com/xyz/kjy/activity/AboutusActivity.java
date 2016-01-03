@@ -3,11 +3,8 @@ package com.xyz.kjy.activity;
 import com.example.kjy.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class AboutusActivity extends Activity {

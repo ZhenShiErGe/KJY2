@@ -5,6 +5,7 @@ public class Constants {
 
 	public static final String CustomersURI="http://financialsys.coding.io/dispatchClient/getAll.json";
 	public static final String LoginURI="http://financialsys.coding.io/doLogin.json";
+	public static final String ChangePwdURI="http://financialsys.coding.io/user/doPasswordChange.json";
 	public static final String DispatchInfoURI="http://financialsys.coding.io/dispatch/getDispatchInfo.json";
 	public static final String DispatchStartURI="http://financialsys.coding.io/dispatch/doStart.json";
 	public static final String DispatchOverURI="http://financialsys.coding.io/dispatch/doEnd.json";
@@ -24,6 +25,7 @@ public class Constants {
 //	public static final String ResponseData="responseData";
 	public static final String BeingLogin="正在登录";
 	public static final String BeingLogout="正在退出";
+	public static final String BeingChangePwd="正在修改密码";
 	public static final String BeingLoad="正在加载";
 	public static final String BeingUpdateCustomer="正在更新商家信息";
 	public static final String BeingStartDispatch="正在创建一次配送";

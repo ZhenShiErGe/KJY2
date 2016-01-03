@@ -13,9 +13,12 @@
     <string name="printerset">打印设置</string>
     <string name="aboutus">关于我们</string>
     <string name="logout">退出登录</string>
+    <string name="login">登录</string>
     
     <string name="password">密　码</string>
     <string name="username">账　号</string>
+    <string name="oldpwd">原密码</string>
+    <string name="newpwd">新密码</string>
     
     
     <string name="customerInfo">商家信息</string>
@@ -49,5 +52,10 @@
     <string name="backto">返回</string>
     <string name="guideleft">点击左上角加号，开始进行配送</string>
     <string name="guideright">点击右上角加号，扫描商家二维码</string>
+    <string name="instruction">盘锦康洁源餐具消毒有限公司是盘锦市大型的，专业的餐具消毒中心。</string>
+    
+    <string name="hint_account">你的账号</string>
+    <string name="hint_password">填写密码</string>
+    
 
 </resources>

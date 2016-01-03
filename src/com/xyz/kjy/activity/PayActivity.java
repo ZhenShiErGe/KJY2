@@ -1,20 +1,9 @@
 package com.xyz.kjy.activity;
 
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.example.kjy.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.xyz.kjy.constant.Constants;
-import com.xyz.kjy.db.MyDatabaseHelper;
-import com.xyz.kjy.net.HttpClientCenter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

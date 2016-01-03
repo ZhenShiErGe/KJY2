@@ -8,10 +8,7 @@ import org.json.JSONObject;
 
 import com.example.kjy.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xyz.kjy.activity.CustomerInfoActivity;
 import com.xyz.kjy.activity.LoginActivity;
-import com.xyz.kjy.activity.PutOffActivity;
-import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.DispatchInfo;
 import com.xyz.kjy.net.HttpClientCenter;

@@ -1,15 +1,8 @@
 package com.xyz.kjy.activity;
 
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.example.kjy.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.db.MyDatabaseHelper;
-import com.xyz.kjy.net.HttpClientCenter;
 import com.xyz.kjy.utils.MySharedPreferences;
 
 import android.app.AlertDialog;
@@ -19,10 +12,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;

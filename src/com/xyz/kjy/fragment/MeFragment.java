@@ -21,11 +21,8 @@ import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xyz.kjy.activity.AboutusActivity;
-import com.xyz.kjy.activity.CustomerInfoActivity;
+import com.xyz.kjy.activity.ChangePwdActivity;
 import com.xyz.kjy.activity.LoginActivity;
-import com.xyz.kjy.activity.MainActivity;
-import com.xyz.kjy.activity.PutOffActivity;
-import com.xyz.kjy.activity.StartDispatchActivity;
 import com.xyz.kjy.activity.SystemApplication;
 import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
@@ -85,17 +82,20 @@ public class MeFragment extends Fragment{
 
 
 	private void initClickers() {
-		tv_userinfo.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				
-			}
-		});
-		
+//		tv_userinfo.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				
+//			}
+//		});
+		tv_userinfo.setText("我是"+MySharedPreferences.getString(ctx, Constants.UserName, "配送员"));
 		tv_updatepsw.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				
+				//跳转到更新密码activity
+				Intent intent=new Intent(ctx,ChangePwdActivity.class);
+				startActivity(intent);
+				ctx.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
 			}
 		});
 		

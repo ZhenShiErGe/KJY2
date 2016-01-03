@@ -57,6 +57,7 @@
         <activity android:name="com.xyz.kjy.activity.PutOffActivity"/>
         <activity android:name="com.xyz.kjy.activity.PayActivity"/>
         <activity android:name="com.xyz.kjy.activity.AboutusActivity"/>
+        <activity android:name="com.xyz.kjy.activity.ChangePwdActivity"/>
     </application>
 
 </manifest>

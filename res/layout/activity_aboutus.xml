@@ -8,6 +8,23 @@
     
     <include  android:id="@+id/layout_bar" layout="@layout/aboutus_title"/>
 
+     <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="48dp" >
+
+         
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="24dp"
+                android:text="@string/instruction"
+                android:textColor="#353535"
+                android:singleLine="false"
+                android:textSize="16sp" />
+      </RelativeLayout>
     
        
 

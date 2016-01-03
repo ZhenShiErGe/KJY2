@@ -5,7 +5,7 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <include layout="@layout/login_title"/>
+     <include  android:id="@+id/layout_bar" layout="@layout/changepwd_title"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,25 +19,26 @@
             android:layout_height="48dp" >
 
             <EditText
-                android:id="@+id/et_username"
+                android:id="@+id/et_oldpwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:background="@drawable/edittext_login"
-                android:hint="@string/hint_account"
+                android:hint="填写原密码"
                 android:paddingLeft="90dp"
+                android:password="true"
                 android:singleLine="true"
-                android:maxLength="11"
+                android:numeric="integer"
                 android:textColorHint="#DDDDDD"
                 android:textSize="16sp" />
-
+            
             <TextView
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/et_username"
+                android:layout_alignLeft="@id/et_oldpwd"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="24dp"
-                android:text="@string/username"
+                android:text="@string/oldpwd"
                 android:textColor="#353535"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -48,12 +49,12 @@
             android:layout_height="48dp" >
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/et_newpwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:background="@drawable/edittext_login"
-                android:hint="@string/hint_password"
+                android:hint="填写新密码(至少6位数字)"
                 android:paddingLeft="90dp"
                 android:password="true"
                 android:singleLine="true"
@@ -64,24 +65,54 @@
             <TextView
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/et_password"
+                android:layout_alignLeft="@id/et_newpwd"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="24dp"
-                android:text="@string/password"
+                android:text="@string/newpwd"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="48dp" >
+
+            <EditText
+                android:id="@+id/et_newpwd1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/edittext_login"
+                android:hint="再次填写上面的新密码"
+                android:paddingLeft="90dp"
+                android:password="true"
+                android:numeric="integer"
+                android:singleLine="true"
+                android:textColorHint="#DDDDDD"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/et_newpwd1"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="24dp"
+                android:text="@string/newpwd"
                 android:textColor="#353535"
                 android:textSize="16sp" />
         </RelativeLayout>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_changepwd"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/btn_bg_green"
+            android:background="@drawable/btn_enable_green"
             android:enabled="false"
             android:paddingBottom="7dp"
             android:paddingTop="7dp"
-            android:text="@string/login"
+            android:text="修改密码"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>
