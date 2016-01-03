@@ -4,6 +4,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.xyz.kjy.utils.AddAndSubView;
 import com.example.kjy.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -31,8 +32,8 @@ import android.widget.Toast;
 public class PutOffActivity extends Activity {
 	private String storeName;
 	private TextView tv_storeName;
-	private EditText et_putoffNum;
-	private EditText et_putonNum;
+//	private EditText et_putoffNum;
+//	private EditText et_putonNum;
 	private RadioGroup rg_settletype;
 	private Button btn_sendMess;
 	private LinearLayout backToMain;
@@ -47,8 +48,19 @@ public class PutOffActivity extends Activity {
 		Intent intent=this.getIntent();
 		storeName=intent.getStringExtra(MyDatabaseHelper.STORENAME);
 		tv_storeName=(TextView) findViewById(R.id.txt_putoffcustomer);
-		et_putoffNum=(EditText) findViewById(R.id.et_putoffnum);
-		et_putonNum=(EditText) findViewById(R.id.et_putonnum);
+		
+		//将原来的editText改为subaddButton
+//		et_putoffNum=(EditText) findViewById(R.id.et_putoffnum);
+//		et_putonNum=(EditText) findViewById(R.id.et_putonnum);
+		
+		LinearLayout linearLayoutPutoff = (LinearLayout)findViewById(R.id.linearLayoutPutoff);
+		final AddAndSubView addAndSubView1 = new AddAndSubView(PutOffActivity.this, 0);
+		linearLayoutPutoff.addView(addAndSubView1);
+		
+		LinearLayout linearLayoutReturn = (LinearLayout)findViewById(R.id.linearLayoutReturn);
+		final AddAndSubView addAndSubView2 = new AddAndSubView(PutOffActivity.this, 0);
+		linearLayoutReturn.addView(addAndSubView2);
+		
 		rg_settletype=(RadioGroup) findViewById(R.id.rg_settletype);
 		btn_sendMess=(Button) findViewById(R.id.btnsendmess);
 		backToMain= (LinearLayout) findViewById(R.id.putoff_back_main);
@@ -69,7 +81,9 @@ public class PutOffActivity extends Activity {
 			public void onClick(View arg0) {
 				//添加确认对话框
 				final Dialog dialog=new AlertDialog.Builder(PutOffActivity.this)
-				.setMessage("确定结算？")
+				.setMessage("商家"+storeName+"\r\n"+"卸货"+addAndSubView1.getNum()+"箱\r\n"+"返货"+addAndSubView2.getNum()
+						+"箱\r\n"+(rg_settletype.getCheckedRadioButtonId()==R.id.rb_money?"现金":"欠款")
+						+"\r\n"+"确定结算?")
 				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
@@ -80,11 +94,10 @@ public class PutOffActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 						if(rg_settletype.getCheckedRadioButtonId()==R.id.rb_money){
-						sendMessage(storeName,et_putoffNum.getText().toString().trim(),
-								et_putonNum.getText().toString().trim(),1+"");
+//						sendMessage(storeName,et_putoffNum.getText().toString().trim(),
+						    sendMessage(storeName,addAndSubView1.getNum()+"",addAndSubView2.getNum()+"",1+"");
 						}else if(rg_settletype.getCheckedRadioButtonId()==R.id.rb_debt){
-							sendMessage(storeName,et_putoffNum.getText().toString().trim(),
-									et_putonNum.getText().toString().trim(),2+"");
+							sendMessage(storeName,addAndSubView1.getNum()+"",addAndSubView2.getNum()+"",2+"");
 						}
 					}
 				})

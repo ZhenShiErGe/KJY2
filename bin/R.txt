@@ -210,8 +210,6 @@ int id et_newpwd 0x7f070014
 int id et_newpwd1 0x7f070015
 int id et_oldpwd 0x7f070013
 int id et_password 0x7f07001f
-int id et_putoffnum 0x7f070026
-int id et_putonnum 0x7f070027
 int id et_qr_string 0x7f070053
 int id et_username 0x7f07001e
 int id fragment_container 0x7f070021
@@ -223,6 +221,8 @@ int id ib_weixin 0x7f070046
 int id iv_qr_image 0x7f070055
 int id launch_product_query 0x7f070006
 int id layout_bar 0x7f070012
+int id linearLayoutPutoff 0x7f070026
+int id linearLayoutReturn 0x7f070027
 int id lvContact 0x7f070039
 int id main_bottom 0x7f070044
 int id money 0x7f070029

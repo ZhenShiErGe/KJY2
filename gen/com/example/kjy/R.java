@@ -247,8 +247,6 @@ public final class R {
         public static final int et_newpwd1=0x7f070015;
         public static final int et_oldpwd=0x7f070013;
         public static final int et_password=0x7f07001f;
-        public static final int et_putoffnum=0x7f070026;
-        public static final int et_putonnum=0x7f070027;
         public static final int et_qr_string=0x7f070053;
         public static final int et_username=0x7f07001e;
         public static final int fragment_container=0x7f070021;
@@ -260,6 +258,8 @@ public final class R {
         public static final int iv_qr_image=0x7f070055;
         public static final int launch_product_query=0x7f070006;
         public static final int layout_bar=0x7f070012;
+        public static final int linearLayoutPutoff=0x7f070026;
+        public static final int linearLayoutReturn=0x7f070027;
         public static final int lvContact=0x7f070039;
         public static final int main_bottom=0x7f070044;
         public static final int money=0x7f070029;
