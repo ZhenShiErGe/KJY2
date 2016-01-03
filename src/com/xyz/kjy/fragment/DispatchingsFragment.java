@@ -33,7 +33,8 @@ import android.widget.Toast;
 public class DispatchingsFragment extends Fragment {
 	private Activity ctx;
 	private View layout;
-	private DispatchInfoFragment dispatchInfoFragment=new DispatchInfoFragment();;
+	private DispatchInfoFragment dispatchInfoFragment=new DispatchInfoFragment();
+	private DispatchHintFragment dispatchHintFragment=new DispatchHintFragment();
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -42,6 +43,13 @@ public class DispatchingsFragment extends Fragment {
 			ctx = this.getActivity();
 			layout = ctx.getLayoutInflater().inflate(R.layout.fragment_dispaching,
 					null);
+			//显示hint
+			FragmentTransaction ft=ctx.getFragmentManager().beginTransaction();
+			if(!dispatchHintFragment.isAdded()){
+				ft.add(R.id.fragment_dispatch_container,dispatchHintFragment);
+			}
+			ft.show(dispatchHintFragment).commit();
+			//以上为显示hint
 			initDispatchInfoFromNet();
 		}else {
 			ViewGroup parent = (ViewGroup) layout.getParent();
@@ -124,7 +132,7 @@ public class DispatchingsFragment extends Fragment {
 	}
 	
 	private void initDispatchFragment(DispatchInfo dispatchInfo) {
-		if(dispatchInfo!=null){
+		if(dispatchInfo!=null&&!dispatchInfo.getCarNum().isEmpty()&&!dispatchInfo.getStartTime().isEmpty()){
 			//layout中添加新的fragment_dispatching_info
 			dispatchInfoFragment=new DispatchInfoFragment();
 			//为该fragment关联数据
@@ -136,7 +144,9 @@ public class DispatchingsFragment extends Fragment {
 			if(!dispatchInfoFragment.isAdded()){
 				ft.add(R.id.fragment_dispatch_container,dispatchInfoFragment);
 			}
-			ft.show(dispatchInfoFragment).commit();
+//			ft.remove(dispatchHintFragment);
+			
+			ft.hide(dispatchHintFragment).show(dispatchInfoFragment).commit();
 		}
 	}
 

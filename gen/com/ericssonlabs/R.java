@@ -66,7 +66,7 @@ public final class R {
 	}
 	public static final class layout {
 		public static final int camera = 0x7f030008;
-		public static final int main = 0x7f030014;
+		public static final int main = 0x7f030015;
 	}
 	public static final class raw {
 		public static final int beep = 0x7f050000;

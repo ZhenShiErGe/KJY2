@@ -47,5 +47,7 @@
     <string name="payok">完成</string>
     
     <string name="backto">返回</string>
+    <string name="guideleft">点击左上角加号，开始进行配送</string>
+    <string name="guideright">点击右上角加号，扫描商家二维码</string>
 
 </resources>

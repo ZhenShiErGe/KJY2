@@ -314,16 +314,17 @@ public final class R {
         public static final int customerinfo_title=0x7f03000a;
         public static final int fragment_customer=0x7f03000b;
         public static final int fragment_dispaching=0x7f03000c;
-        public static final int fragment_dispatchinfo=0x7f03000d;
-        public static final int fragment_setting=0x7f03000e;
-        public static final int layout_bottom=0x7f03000f;
-        public static final int layout_head_friend=0x7f030010;
-        public static final int layout_title=0x7f030011;
-        public static final int list_position=0x7f030012;
-        public static final int login_title=0x7f030013;
-        public static final int main=0x7f030014;
-        public static final int putoff_title=0x7f030015;
-        public static final int startdispatch_title=0x7f030016;
+        public static final int fragment_dispatchhint=0x7f03000d;
+        public static final int fragment_dispatchinfo=0x7f03000e;
+        public static final int fragment_setting=0x7f03000f;
+        public static final int layout_bottom=0x7f030010;
+        public static final int layout_head_friend=0x7f030011;
+        public static final int layout_title=0x7f030012;
+        public static final int list_position=0x7f030013;
+        public static final int login_title=0x7f030014;
+        public static final int main=0x7f030015;
+        public static final int putoff_title=0x7f030016;
+        public static final int startdispatch_title=0x7f030017;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -349,6 +350,8 @@ public final class R {
         public static final int dispatchStart=0x7f080021;
         public static final int dispatchStartTime=0x7f08001f;
         public static final int dispatchings=0x7f080007;
+        public static final int guideleft=0x7f08002c;
+        public static final int guideright=0x7f08002d;
         public static final int hello=0x7f080000;
         public static final int hello_world=0x7f080005;
         public static final int logout=0x7f08000f;
