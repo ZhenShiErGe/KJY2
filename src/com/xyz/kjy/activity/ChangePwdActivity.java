@@ -12,7 +12,10 @@ import com.xyz.kjy.constant.Constants;
 import com.xyz.kjy.net.HttpClientCenter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -74,57 +77,76 @@ public class ChangePwdActivity extends Activity {
 		if(!newpwd.equals(newpwd1))
 			Toast.makeText(ChangePwdActivity.this, "两次新密码不一致", Toast.LENGTH_SHORT).show();
 		else{
-			//需要发送的参数
-			RequestParams params=new RequestParams();
-			params.put("oldPassword", oldpwd);
-			params.put("newPassword", newpwd);
-			//显示正在登录处理对话窗
-			final ProgressDialog progressDialog=new ProgressDialog(ChangePwdActivity.this);
-			progressDialog.setMessage(Constants.BeingChangePwd);
-			progressDialog.show();
-			//开始发送请求
-			AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
-			if(HttpClientCenter.getCookie().size()!=0)
-				client.setCookieStore(HttpClientCenter.getCookieStore());
-			client.post(Constants.ChangePwdURI, params, new JsonHttpResponseHandler(){
+			final Dialog dialog=new AlertDialog.Builder(ChangePwdActivity.this)
+			.setMessage("新密码为"+newpwd+"\r\n确定修改?")
+			.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 				@Override
-				public void onSuccess(int statusCode, Header[] headers,JSONObject response) {
-					boolean result=false;
+				public void onClick(DialogInterface arg0, int arg1) {
+					arg0.cancel();
+				}
+			})
+			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					doChangePwd(oldpwd, newpwd1);
+				}
+			})
+			.create();
+			dialog.show();
+		}
+	}
+	
+	protected void doChangePwd(String oldpwd,String newpwd){
+		//需要发送的参数
+		RequestParams params=new RequestParams();
+		params.put("oldPassword", oldpwd);
+		params.put("newPassword", newpwd);
+		//显示正在登录处理对话窗
+		final ProgressDialog progressDialog=new ProgressDialog(ChangePwdActivity.this);
+		progressDialog.setMessage(Constants.BeingChangePwd);
+		progressDialog.show();
+		//开始发送请求
+		AsyncHttpClient client=HttpClientCenter.getAsyncHttpClient();
+		if(HttpClientCenter.getCookie().size()!=0)
+			client.setCookieStore(HttpClientCenter.getCookieStore());
+		client.post(Constants.ChangePwdURI, params, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,JSONObject response) {
+				boolean result=false;
+				try{
+					result=response.getBoolean("isSuccess");
+				}catch(JSONException e){
+					Log.e("TAG","内部错误："+e.getMessage());
+					Toast.makeText(ChangePwdActivity.this, "修改密码失败", Toast.LENGTH_SHORT).show();
+				}
+				if(result){
+//	     			Intent intent =new Intent(ChangePwdActivity.this,MainActivity.class);
+//	     			startActivity(intent);
+					ChangePwdActivity.this.finish();
+					ChangePwdActivity.this.overridePendingTransition(R.anim.push_right_in,
+							R.anim.push_right_out);
+	     			progressDialog.dismiss();
+	     			Toast.makeText(ChangePwdActivity.this, "修改密码成功", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					progressDialog.dismiss();
 					try{
-						result=response.getBoolean("isSuccess");
+						String errorMesg=response.getString("errorMesg");
+						Toast.makeText(ChangePwdActivity.this, "修改密码失败:"+errorMesg, Toast.LENGTH_SHORT).show();
 					}catch(JSONException e){
 						Log.e("TAG","内部错误："+e.getMessage());
-						Toast.makeText(ChangePwdActivity.this, "修改密码失败", Toast.LENGTH_SHORT).show();
-					}
-					if(result){
-//		     			Intent intent =new Intent(ChangePwdActivity.this,MainActivity.class);
-//		     			startActivity(intent);
-						ChangePwdActivity.this.finish();
-						ChangePwdActivity.this.overridePendingTransition(R.anim.push_right_in,
-								R.anim.push_right_out);
-		     			progressDialog.dismiss();
-		     			Toast.makeText(ChangePwdActivity.this, "修改密码成功", Toast.LENGTH_SHORT).show();
-					}
-					else {
-						progressDialog.dismiss();
-						try{
-							String errorMesg=response.getString("errorMesg");
-							Toast.makeText(ChangePwdActivity.this, "修改密码失败:"+errorMesg, Toast.LENGTH_SHORT).show();
-						}catch(JSONException e){
-							Log.e("TAG","内部错误："+e.getMessage());
-							Toast.makeText(ChangePwdActivity.this, "修改密码失败:", Toast.LENGTH_SHORT).show();
-						}
+						Toast.makeText(ChangePwdActivity.this, "修改密码失败:", Toast.LENGTH_SHORT).show();
 					}
 				}
-				@Override
-				public void onFailure(int statusCode, Header[] headers,
-						Throwable throwable, JSONObject errorResponse) {
-					progressDialog.dismiss();
-//					Log.e("TAG",throwable.getMessage());
-					Toast.makeText(ChangePwdActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
-				}
-			});
-		}
+			}
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					Throwable throwable, JSONObject errorResponse) {
+				progressDialog.dismiss();
+//				Log.e("TAG",throwable.getMessage());
+				Toast.makeText(ChangePwdActivity.this, "请检查网络连接", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	// EditText监听器
@@ -156,3 +178,7 @@ public class ChangePwdActivity extends Activity {
 		}
 	}
 }
+
+
+
+
