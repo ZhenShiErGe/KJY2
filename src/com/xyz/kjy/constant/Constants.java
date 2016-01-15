@@ -2,16 +2,16 @@ package com.xyz.kjy.constant;
 
 
 public class Constants {
-
-	public static final String CustomersURI="http://financialsys.coding.io/dispatchClient/getAll.json";
-	public static final String LoginURI="http://financialsys.coding.io/doLogin.json";
-	public static final String ChangePwdURI="http://financialsys.coding.io/user/doPasswordChange.json";
-	public static final String DispatchInfoURI="http://financialsys.coding.io/dispatch/getDispatchInfo.json";
-	public static final String DispatchStartURI="http://financialsys.coding.io/dispatch/doStart.json";
-	public static final String DispatchOverURI="http://financialsys.coding.io/dispatch/doEnd.json";
-	public static final String LogoutURI="http://financialsys.coding.io/doLogout.json";
-	public static final String SendMessURI="http://financialsys.coding.io/dispatchRecord/doAdd.json";
-	public static final String AllCarURI="http://financialsys.coding.io/car/getAll.json";
+	public static final String URL="http://financialsys.coding.io";
+	public static final String CustomersURI=URL+"/dispatchClient/getAll.json";
+	public static final String LoginURI=URL+"/doLogin.json";
+	public static final String ChangePwdURI=URL+"/user/doPasswordChange.json";
+	public static final String DispatchInfoURI=URL+"/dispatch/getDispatchInfo.json";
+	public static final String DispatchStartURI=URL+"/dispatch/doStart.json";
+	public static final String DispatchOverURI=URL+"/dispatch/doEnd.json";
+	public static final String LogoutURI=URL+"/doLogout.json";
+	public static final String SendMessURI=URL+"/dispatchRecord/doAdd.json";
+	public static final String AllCarURI=URL+"/car/getAll.json";
 	
 //	public static final String Cookie="cookie";
 	public static final String UserIsLogin="isLogin";
