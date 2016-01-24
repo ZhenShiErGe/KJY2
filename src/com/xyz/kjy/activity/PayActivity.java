@@ -34,7 +34,10 @@ public class PayActivity extends Activity {
 		else if(type==2){
 			payHint.setText("请向商家"+storeName+"收取"+"欠单");
 		}
-		detail.setText(this.getIntent().getIntExtra("price",0)/100.00+"元/箱*"
+		if(num==0)
+			detail.setText("0元");
+		else
+			detail.setText(this.getIntent().getIntExtra("price",0)/100.00+"元/箱*"
 				+this.getIntent().getStringExtra("putoffNum")+"箱="+(num/100.0)+"元");
 		
 		payok.setOnClickListener(new View.OnClickListener() {

@@ -138,7 +138,8 @@ public class PutOffActivity extends Activity {
 						intent.putExtra("payNum", Integer.parseInt(payNum));
 						intent.putExtra("storeName", storeName);
 						intent.putExtra("putoffNum", outNum);//卸货数量
-						intent.putExtra("price",Integer.parseInt(payNum)/Integer.parseInt(outNum));//卸货单价
+						if(Integer.parseInt(outNum)!=0)
+							intent.putExtra("price",Integer.parseInt(payNum)/Integer.parseInt(outNum));//卸货单价
 						startActivity(intent);
 						PutOffActivity.this.overridePendingTransition(R.anim.push_left_in,
 								R.anim.push_left_out);
