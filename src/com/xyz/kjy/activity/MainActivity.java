@@ -111,7 +111,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		btn_add_dispitch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				if(dispatchingsFragment.getDispatchInfoFragment().isAdded()){
+				if(MySharedPreferences.getBoolean(MainActivity.this, Constants.DispatchIsDoing, false)){
 					Toast.makeText(MainActivity.this, "已经在配送", Toast.LENGTH_SHORT).show();
 				}
 				else{
@@ -120,7 +120,6 @@ public class MainActivity extends Activity implements OnClickListener{
 			}
 		});
 	}
-
 
 
 	/**
@@ -255,7 +254,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				String str_lastUpdateDate=MySharedPreferences.getString(this,"lastUpdateTime", "2015-09-19 11:45:16");//后面为默认值
 				Date lastUpDate = sdf.parse(str_lastUpdateDate);
 				Date currentDate=new Date();
-				if(currentDate.getTime()-lastUpDate.getTime()>=5*24*60*60*1000){//每5天更新数据
+				if(currentDate.getTime()-lastUpDate.getTime()>=3*24*60*60*1000){//每5天更新数据
 //				if(true){//每次刷新都要更新数据
 					MySharedPreferences.putString(this,"lastUpdateTime", sdf.format(currentDate));
 					updateCustomerData();

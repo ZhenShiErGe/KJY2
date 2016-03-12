@@ -2,7 +2,7 @@ package com.xyz.kjy.constant;
 
 
 public class Constants {
-	public static final String URL="http://financialsys.coding.io";
+	public static final String URL="http://119.29.159.154:8080";
 	public static final String CustomersURI=URL+"/dispatchClient/getAll.json";
 	public static final String LoginURI=URL+"/doLogin.json";
 	public static final String ChangePwdURI=URL+"/user/doPasswordChange.json";
