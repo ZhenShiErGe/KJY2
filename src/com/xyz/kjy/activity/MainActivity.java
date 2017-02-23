@@ -254,7 +254,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				String str_lastUpdateDate=MySharedPreferences.getString(this,"lastUpdateTime", "2015-09-19 11:45:16");//后面为默认值
 				Date lastUpDate = sdf.parse(str_lastUpdateDate);
 				Date currentDate=new Date();
-				if(currentDate.getTime()-lastUpDate.getTime()>=3*24*60*60*1000){//每5天更新数据
+				if(currentDate.getTime()-lastUpDate.getTime()>=60*60*1000){//每小时更新数据
 //				if(true){//每次刷新都要更新数据
 					MySharedPreferences.putString(this,"lastUpdateTime", sdf.format(currentDate));
 					updateCustomerData();
